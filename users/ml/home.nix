@@ -3,12 +3,12 @@
 {
 
   imports = [
+    ./bash.nix
     ./vim.nix
+    ./tmux.nix
   ];
 
   home.packages = with pkgs; [
-      vim
-      tmux
       git
   ];
 
