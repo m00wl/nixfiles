@@ -5,11 +5,12 @@
   imports = [
     ./bash.nix
     ./vim.nix
+    ./git.nix
     ./tmux.nix
   ];
 
   home.packages = with pkgs; [
-      git
+
   ];
 
   home.sessionVariables = {
