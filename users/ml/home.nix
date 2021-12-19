@@ -1,6 +1,12 @@
-{ configs, pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
+
+  home.packages = with pkgs; [
+      tmux
+      git
+  ];
+
   home.username = "ml";
   home.homeDirectory = "/home/ml";
   
