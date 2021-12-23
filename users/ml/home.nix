@@ -13,10 +13,6 @@
 
   ];
 
-  home.sessionVariables = {
-    EDITOR = "vim";
-  };
-
   home.username = "ml";
   home.homeDirectory = "/home/ml";
 

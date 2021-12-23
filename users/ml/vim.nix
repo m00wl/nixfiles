@@ -1,6 +1,10 @@
 { pkgs, ... }:
 
 {
+  home.sessionVariables = {
+    EDITOR = "vim";
+  };
+
   programs.vim = {
     enable = true;
 
@@ -29,6 +33,7 @@
       " map <F3> to toggle line soft wrap
       nnoremap <F3> :set wrap! wrap?<CR>
       imap <F3> <C-O><F3>
+
 
       " map <F4> to toggle overlines
       let s:overlines = 0
