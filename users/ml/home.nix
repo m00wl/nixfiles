@@ -4,6 +4,7 @@
 
   imports = [
     ./bash.nix
+    ./ssh.nix
     ./vim.nix
     ./git.nix
     ./tmux.nix
