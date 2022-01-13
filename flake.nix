@@ -1,5 +1,5 @@
 {
-  description = "My NixOS configurations flake";
+  description = "m00wl's flake for NixOS configurations";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/release-21.11";
@@ -21,7 +21,7 @@
 
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.ml = import ./users/ml/home.nix;
+            home-manager.users.m00wl = import ./users/m00wl/home.nix;
           }
         ];
       };
@@ -34,7 +34,7 @@
       
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.ml = import ./users/ml/home.nix;
+            home-manager.users.m00wl = import ./users/m00wl/home.nix;
           }
         ];
       };

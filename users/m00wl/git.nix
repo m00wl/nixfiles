@@ -5,7 +5,7 @@
   programs.git = {
     enable = true;
     userName = "Moritz Lumme";
-    userEmail = "46034439+m-lumme@users.noreply.github.com";
+    userEmail = "46034439+m00wl@users.noreply.github.com";
     extraConfig = {
       core = {
         editor = "vim";

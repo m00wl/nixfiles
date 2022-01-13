@@ -40,7 +40,7 @@
   };
 
   # Create user account 
-  users.users.ml = {
+  users.users.m00wl = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
     openssh.authorizedKeys.keys = [
