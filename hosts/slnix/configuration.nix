@@ -43,6 +43,9 @@
   users.users.ml = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG/9QLlB+fy5eSjqEQvIznnPxZETamnnKLWBoXpZeLLG me@moritz.lumme.de"
+    ];
   };
 
   # List packages installed in system profile
@@ -52,7 +55,10 @@
   ];
 
   # Enable the OpenSSH daemon
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    passwordAuthentication = false;
+  };
 
   # Enable zfs services
   services.zfs.autoScrub.enable = true;
