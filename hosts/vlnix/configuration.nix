@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # Enable flakes support
@@ -38,19 +38,18 @@
     keyMap = "de";
   };
 
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
-  # Configure keymap in X11
-  # services.xserver.layout = "us";
-  # services.xserver.xkbOptions = "eurosign:e";
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+  # Enable X11 server + gdm + gnome
+  services.xserver = {
+    enable = true;
+    layout = "de";
+    lininput = true;
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enalbe = true;
+  };
 
   # Enable sound.
-  # sound.enable = true;
-  # hardware.pulseaudio.enable = true;
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
 
   # Create user account
   users.users.m00wl = {
