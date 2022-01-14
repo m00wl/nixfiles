@@ -16,11 +16,6 @@
       fsType = "zfs";
     };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/C700-FE4C";
-      fsType = "vfat";
-    };
-
   fileSystems."/home" =
     { device = "rpool/root/home";
       fsType = "zfs";
@@ -29,6 +24,11 @@
   fileSystems."/tmp" =
     { device = "rpool/root/tmp";
       fsType = "zfs";
+    };
+
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/7560-AB0D";
+      fsType = "vfat";
     };
 
   swapDevices = [ ];
