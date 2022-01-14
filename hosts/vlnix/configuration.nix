@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 
 {
   # Enable flakes support
@@ -42,9 +42,9 @@
   services.xserver = {
     enable = true;
     layout = "de";
-    lininput = true;
+    libinput.enable = true;
     displayManager.gdm.enable = true;
-    desktopManager.gnome.enalbe = true;
+    desktopManager.gnome.enable = true;
   };
 
   # Enable sound.
