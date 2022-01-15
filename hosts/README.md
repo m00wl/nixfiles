@@ -103,11 +103,13 @@ Edit generated configuration:
 - add `networking.hostId` (from `head -c 8 /etc/machine-id`) for ZFS to work
 - activate flakes support:
 ```nix
-nix = {
-  package = pkgs.nixUnstable;
-  extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
+{
+  nix = {
+    package = pkgs.nixUnstable;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+  };
 }
 ```
 
