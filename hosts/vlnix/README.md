@@ -1,4 +1,3 @@
-Bootstrap
-=========
+# Additional Bootstrap Process
 
-This document describes the bootstrap process for `vlnix`.
+This document describes the additional bootstrap process for `vlnix`.
