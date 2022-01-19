@@ -21,7 +21,11 @@
 
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.m00wl = import ./users/m00wl/home.nix;
+            home-manager.users = {
+              m00wl.imports = [
+                ./hosts/vlnix/home-m00wl.nix
+              ];
+            };
           }
         ];
       };
@@ -31,10 +35,14 @@
         modules = [
           ./hosts/slnix/configuration.nix
           home-manager.nixosModules.home-manager {
-      
+
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.m00wl = import ./users/m00wl/home.nix;
+            home-manager.users = {
+              m00wl.imports = [
+                ./hosts/slnix/home-m00wl.nix
+              ];
+            };
           }
         ];
       };

@@ -6,7 +6,8 @@ This repository contains my NixOS system configurations.
 
 The repository adheres to the following structure:
 
-- `hosts/`: system/hardware configuration + bootstrap process for each machine
+- `hosts/`: system/user/hardware configuration + bootstrap process for each
+machine
 
 - `users/`: home-manager configuration + dotfiles for each user
 
