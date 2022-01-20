@@ -40,7 +40,6 @@
     escapeTime = 0;
     historyLimit = 50000;
     keyMode = "vi";
-    newSession = true;
     #prefix = "C-a";
     shortcut = "a";
     #reverseSplit = true;
@@ -143,7 +142,6 @@
       set -g message-style fg=black,bg=colour"$TMUX_ACC_CLR"
       set -g mode-style fg=black,bg=colour"$TMUX_ACC_CLR"
       set -g pane-active-border-style fg=colour"$TMUX_ACC_CLR",bg=black,bold
-
     '';
 
   };
