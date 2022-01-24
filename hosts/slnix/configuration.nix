@@ -1,25 +1,19 @@
 { config, pkgs, ... }:
 
 {
-  # Enable flakes support
-  nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
-
   imports =
     [
       ./hardware-configuration.nix
+      ../../modules/flakes.nix
+      ../../modules/zfs.nix
+      ../../modules/m00wl.nix
+      ../../modules/i18n.nix
+      ../../modules/openssh.nix
     ];
 
   # Use the systemd-boot EFI boot loader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  # Enable zfs support
-  boot.supportedFilesystems = [ "zfs" ];
 
   # Define hostname
   networking.hostName = "slnix";
@@ -32,37 +26,11 @@
   networking.interfaces.enp0s25.useDHCP = true;
   networking.interfaces.enp2s0.useDHCP = true;
 
-  # Select internationalisation properties
-  i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-    font = "Lat2-Terminus16";
-    keyMap = "de";
-  };
-
-  # Create user account 
-  users.users.m00wl = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG/9QLlB+fy5eSjqEQvIznnPxZETamnnKLWBoXpZeLLG me@moritz.lumme.de"
-    ];
-  };
-
   # List packages installed in system profile
   environment.systemPackages = with pkgs; [
     vim
     wget
   ];
-
-  # Enable the OpenSSH daemon
-  services.openssh = {
-    enable = true;
-    passwordAuthentication = false;
-  };
-
-  # Enable zfs services
-  services.zfs.autoScrub.enable = true;
-  services.zfs.autoSnapshot.enable = true;
 
   system.stateVersion = "21.11";
 }
