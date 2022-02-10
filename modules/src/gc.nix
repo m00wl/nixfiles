@@ -2,7 +2,7 @@
 
 {
   # Setup periodic garbage collection
-  nix.gc {
+  nix.gc = {
     automatic = true;
     dates = "weekly";
   };

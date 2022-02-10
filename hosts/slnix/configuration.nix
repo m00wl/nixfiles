@@ -4,11 +4,7 @@
   imports =
     [
       ./hardware-configuration.nix
-      ../../modules/flakes.nix
-      ../../modules/zfs.nix
-      ../../modules/m00wl.nix
-      ../../modules/i18n.nix
-      ../../modules/openssh.nix
+      ../../modules/core.nix
     ];
 
   # Use the systemd-boot EFI boot loader

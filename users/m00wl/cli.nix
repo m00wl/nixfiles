@@ -2,11 +2,11 @@
 
 {
   imports = [
-    ./bash.nix
-    ./ssh.nix
-    ./vim.nix
-    ./git.nix
-    ./tmux.nix
+    ./src/bash.nix
+    ./src/ssh.nix
+    ./src/vim.nix
+    ./src/git.nix
+    ./src/tmux.nix
   ];
 
   home.packages = with pkgs; [

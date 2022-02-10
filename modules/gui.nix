@@ -3,10 +3,6 @@
 {
   imports = [
     ./src/gnome.nix
-    ./src/vscode.nix
-  ];
-
-  home.packages = with pkgs; [
-
+    ./src/sound.nix
   ];
 }
