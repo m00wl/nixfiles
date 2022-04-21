@@ -31,7 +31,7 @@
       };
 
       slnix = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+        system = "aarch64-linux";
         modules = [
           ./hosts/slnix/configuration.nix
           home-manager.nixosModules.home-manager {
