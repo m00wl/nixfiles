@@ -23,6 +23,11 @@
       fsType = "zfs";
     };
 
+  fileSystems."/srv" =
+    { device = "dpool/root/srv";
+      fsType = "zfs";
+    };
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/c28e41e0-3e52-4654-8183-36b54ed8b022"; }
     ];
