@@ -5,12 +5,17 @@ let
   admin = config.users.users.m00wl;
   backupDir = "/data/backup/git";
   github-mirror = pkgs.writeShellScriptBin "github-mirror" ''
+    set -eu
+    set -o pipefail
     echo "mirroring to github"
     GH_USER=$GL_USER
-    GH_REPO=$GL_REPO
-    [ ! -f ~/github/pat_$GH_USER ] && echo "error: no personal access token found"
-    GH_TOKEN=$(cat ${cfg.dataDir}/github/pat_$GL_USER)
-    git push https://$GH_TOKEN@github.com/$GH_USER/$GH_REPO.git
+    GH_REPO=$(basename $GL_REPO)
+    if [ ! -f ~/github/pat_$GH_USER ]; then
+      echo "error: no personal access token found"
+      exit 1
+    fi
+    GH_TOKEN=$(cat ${cfg.dataDir}/github/pat_$GH_USER)
+    git push --mirror https://$GH_TOKEN@github.com/$GH_USER/$GH_REPO.git
   '';
 in
 {
