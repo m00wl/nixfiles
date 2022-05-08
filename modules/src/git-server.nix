@@ -114,6 +114,7 @@ in
       $strict_export = true;
       $home_link_str = "git.lumme.de";
       $site_name = "git.lumme.de";
+      $omit_owner = true;
     '';
   };
 }
