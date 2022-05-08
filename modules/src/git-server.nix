@@ -84,14 +84,15 @@ in
       pkgs.gzip
     ];
     script = ''
+      set -eu
+      set -o pipefail
       REPOS_DIR=${cfg.dataDir}/repositories
       BACKUP_DIR=${backupDir}
       gitolite writable @all off "Backup in progress. Please try again at a later point in time."
       test -d $BACKUP_DIR || mkdir $BACKUP_DIR
-      for d in $REPOS_DIR/*/ ; do
-        REPO_NAME=$(basename $d)
-        tar -C $REPOS_DIR -cpzf $BACKUP_DIR/$REPO_NAME.tgz.back $REPO_NAME
-      done
+      SRC_PATH=$(dirname $REPOS_DIR)
+      SRC_NAME=$(basename $REPOS_DIR)
+      tar -C $SRC_PATH -cpzf $BACKUP_DIR/$SRC_NAME.tgz.back $SRC_NAME
       gitolite writable @all on
     '';
     startAt = [ "*-*-* 03:00:00" ];
