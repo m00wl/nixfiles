@@ -42,6 +42,9 @@
               m00wl.imports = [
                 ./hosts/slnix/home-m00wl.nix
               ];
+              zeus.imports = [
+                ./hosts/slnix/home-zeus.nix
+              ];
             };
           }
         ];

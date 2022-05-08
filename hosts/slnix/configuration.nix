@@ -7,6 +7,7 @@
       ../../modules/core.nix
       ../../modules/src/nginx.nix
       ../../modules/src/git-server.nix
+      ../../modules/src/zeus.nix
     ];
 
   # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)

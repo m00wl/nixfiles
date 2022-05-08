@@ -126,13 +126,13 @@ Set `root` password and reboot.
 Clone git repository:
 
 ```bash
-git clone git@github.com:m00wl/nixos-config.git ~/
+git clone git@github.com:m00wl/nixos-config.git ~/.nixos-config
 ```
 
 Symlink `flake.nix`:
 
 ```bash
-ln -s ~/nixos-config/flake.nix /etc/nixos/
+ln -s ~/.nixos-config/flake.nix /etc/nixos/
 ```
 
 Make sure that `networking.hostname` aligns with a valid NixOS configuration in
@@ -140,7 +140,7 @@ Make sure that `networking.hostname` aligns with a valid NixOS configuration in
 If necessary, update `hardware-configuration.nix` of this host:
 
 ```bash
-cp /etc/nixos/hardware-configuration.nix ~/nixos-config/hosts/$(hostname)/
+cp /etc/nixos/hardware-configuration.nix ~/.nixos-config/hosts/$(hostname)/
 ```
 
 Rebuild system:
