@@ -28,15 +28,31 @@
   ];
   boot.plymouth.enable = true;
 
-  # Define hostname
-  networking.hostName = "slnix";
-  networking.hostId = "c416237d";
+  # Configure networking for DMZ
+  networking = {
+    hostName = "slnix";
+    hostId = "c416237d";
+    useDHCP = false;
+    domain = "lumme.de";
+    dhcpcd.enable = false;
+    enableIPv6 = false;
+    vlans = {
+      vlan11 = {
+        id = 11;
+        interface = "eth0";
+      };
+    };
+    interfaces.vlan11.ipv4.addresses = [
+      { address = "192.168.11.20"; prefixLength = 24; }
+    ];
+    defaultGateway = "192.168.11.1";
+    nameservers = [
+      "192.168.11.1"
+    ];
+  };
 
   # Set time zone
   time.timeZone = "Europe/Amsterdam";
-
-  # Enable DHCP 
-  networking.interfaces.eth0.useDHCP = true;
 
   # List packages installed in system profile
   environment.systemPackages = with pkgs; [
