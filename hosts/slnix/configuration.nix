@@ -5,9 +5,11 @@
     [
       ./hardware-configuration.nix
       ../../modules/core.nix
-      ../../modules/src/nginx.nix
-      ../../modules/src/git-server.nix
       ../../modules/src/zeus.nix
+      ../../modules/src/nginx.nix
+      ../../modules/src/fail2ban.nix
+      ../../modules/src/git-server.nix
+      ../../modules/src/vaultwarden.nix
     ];
 
   # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
