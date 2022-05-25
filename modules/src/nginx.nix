@@ -1,7 +1,7 @@
 { config, pkgs, lib, ...}:
 
 {
-  config.networking.firewall.allowedTCPPorts = [ 80 ];
+  config.networking.firewall.allowedTCPPorts = [ 443 ];
 
   # Retrieve htpasswd from sops-nix
   config.sops.secrets."nginx.service/lumme.de.htpasswd" = {
@@ -24,17 +24,15 @@
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
     logError = "stderr info";
-    #appendHttpConfig = ''
-    #  auth_basic secured;
-    #  auth_basic_user_file /nix/store/l7h8anz7prabk1y0zd6kbj068n4v18wr-example.com.htpasswd;
-    #'';
-    virtualHosts."example.com" = {
-      basicAuth = { test = "test123"; };
+    virtualHosts."moritz.lumme.de" = {
+      enableACME = true;
+      forceSSL = true;
     };
   };
 
-  #security.acme = {
-  #  acceptTerms = true;
-  #  email = "contact@moritz.lumme.de";
-  #};
+  config.security.acme = {
+    acceptTerms = true;
+    email = "acme@moritz.lumme.de";
+    certs."moritz.lumme.de" = {};
+  };
 }

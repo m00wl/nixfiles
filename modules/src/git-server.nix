@@ -106,6 +106,13 @@ in
     location = "";
   };
 
+  security.acme.certs."moritz.lumme.de".extraDomainNames = [ config.services.nginx.gitweb.virtualHost ];
+
+  services.nginx.virtualHosts.${config.services.nginx.gitweb.virtualHost} = {
+    useACMEHost = "moritz.lumme.de";
+    forceSSL = true;
+  };
+
   # Point gitweb to bare repos
   services.gitweb = {
     projectroot = "${cfg.dataDir}/repositories";

@@ -1,4 +1,4 @@
-{ config, pkgs, ...}:
+{ config, pkgs, lib, ...}:
 
 let
   backupDir = "/data/backup/vw";
@@ -9,7 +9,7 @@ in
     backupDir = backupDir;
     config = {
       domain = "https://vw.lumme.de";
-      signupsAllowed = true;
+      signupsAllowed = false;
       websocketEnabled = true;
     };
   };
@@ -18,10 +18,13 @@ in
     "d ${backupDir} 0755 ${toString config.users.users.vaultwarden.name} ${toString config.users.groups.users.name} -"
   ];
 
+  security.acme.certs."moritz.lumme.de".extraDomainNames = [ "vw.lumme.de" ];
+
   services.nginx = {
     virtualHosts."vw.lumme.de" = {
-      #forceSSL = true;
-      #enableACME = true;
+      useACMEHost = "moritz.lumme.de";
+      forceSSL = true;
+      basicAuthFile = lib.mkForce null;
       locations."/" = {
         proxyPass = "http://localhost:8000";
         proxyWebsockets = true;
@@ -36,4 +39,7 @@ in
       };
     };
   };
+
+  # Change backup time to 03 AM
+  systemd.timers.backup-vaultwarden.timerConfig.OnCalendar = "*-*-* 03:00:00";
 }
