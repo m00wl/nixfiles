@@ -6,6 +6,7 @@
       ./hardware-configuration.nix
       ../../modules/core.nix
       ../../modules/gui.nix
+      ../../modules/src/watchy.nix
     ];
 
   # Use systemd-boot EFI boot loader
