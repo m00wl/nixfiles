@@ -10,6 +10,7 @@
       ../../modules/src/fail2ban.nix
       ../../modules/src/git-server.nix
       ../../modules/src/vaultwarden.nix
+      ../../modules/src/radicale.nix
     ];
 
   # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
