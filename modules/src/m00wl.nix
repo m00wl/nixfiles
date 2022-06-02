@@ -10,11 +10,11 @@
     ];
   };
 
-  sops.secrets."openssh.service/home.lumme.de" = {
+  sops.secrets."ssh/home" = {
     owner = config.users.users.m00wl.name;
     group = config.users.users.m00wl.group;
   };
-  sops.secrets."openssh.service/git.lumme.de" = {
+  sops.secrets."ssh/git-server" = {
     owner = config.users.users.m00wl.name;
     group = config.users.users.m00wl.group;
   };

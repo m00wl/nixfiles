@@ -5,8 +5,8 @@
     enable = true;
     forwardAgent = true;
     includes = [
-      "/run/secrets/openssh.service/home.lumme.de"
-      "/run/secrets/openssh.service/git.lumme.de"
+      "/run/secrets/ssh/home"
+      "/run/secrets/ssh/git-server"
     ];
   };
 }

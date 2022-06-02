@@ -4,8 +4,9 @@
   config.networking.firewall.allowedTCPPorts = [ 443 ];
 
   # Retrieve htpasswd from sops-nix
-  config.sops.secrets."nginx.service/lumme.de.htpasswd" = {
+  config.sops.secrets."nginx/htpasswd" = {
     sopsFile = ../../hosts/slnix/secrets.yaml;
+    key = "auth/htpasswd";
     owner = config.services.nginx.user;
     group = config.services.nginx.group;
   };
@@ -13,7 +14,7 @@
   # Make all virtualHosts default to http basic auth
   options.services.nginx.virtualHosts = lib.mkOption {
     type = lib.types.attrsOf (lib.types.submodule {
-      basicAuthFile = "/run/secrets/nginx.service/lumme.de.htpasswd";
+      basicAuthFile = "/run/secrets/nginx/htpasswd";
     });
   };
   
