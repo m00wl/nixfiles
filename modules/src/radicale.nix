@@ -1,6 +1,9 @@
 { config, pkgs, lib, ... }:
 
 let
+  cfg = config.services.radicale;
+  user = config.users.users.radicale.name;
+  group = config.users.groups.radicale.name;
   # Radicale initialization
   radicale-init = pkgs.writeShellScriptBin "radicale-init" ''
     set -eu
@@ -28,7 +31,8 @@ let
     fi
   '';
 
-  # Radicale backup
+  # Radicale locations
+  runtimeDir = "/var/lib/radicale/collections";
   backupDir = "/data/backup/rc";
 in
 {
@@ -48,6 +52,7 @@ in
           hook = ''
             ${git} add -A && (${git} diff --cached --quiet || ${git} commit -m "Changes by %(user)s")
           '';
+          filesystem_folder = runtimeDir;
       };
       web = {
         # Disable web interface
@@ -60,7 +65,7 @@ in
   };
 
   # Initialize git repo for versioning of changes
-  systemd.services.radicale.preStart = "${radicale-init}/bin/radicale-init $STATE_DIRECTORY";
+  systemd.services.radicale.preStart = "${radicale-init}/bin/radicale-init ${runtimeDir}";
 
   # Add subdomain to base cert
   security.acme.certs."moritz.lumme.de".extraDomainNames = [ "rc.lumme.de" ];
@@ -82,11 +87,12 @@ in
     };
   };
 
-  # Backup
+  # Initialize runtime and backup dirs
   systemd.tmpfiles.rules = [
-    "d ${backupDir} 0755 ${config.users.users.radicale.name} ${toString config.users.groups.users.name} -"
+    "d ${backupDir} 0755 ${user} ${config.users.groups.users.name} -"
   ];
 
+  # Backup
   systemd.services.radicale-backup = {
     description = "Periodic backup of radicale collections";
     wantedBy = [ "multi-user.target" ];
@@ -94,8 +100,8 @@ in
     unitConfig.RequiresMountsFor = backupDir;
     serviceConfig = {
       Type = "oneshot";
-      User = config.users.users.radicale.name;
-      Group = config.users.groups.radicale.name;
+      User = user;
+      Group = group;
     };
     path = [
       pkgs.gnutar
@@ -105,7 +111,7 @@ in
     script = ''
       set -eu
       set -o pipefail
-      SRC=/var/lib/${config.systemd.services.radicale.serviceConfig.StateDirectory}
+      SRC=${runtimeDir}
       SRC_PATH=$(dirname $SRC)
       SRC_NAME=$(basename $SRC)
       BACKUP_DIR=${backupDir}
@@ -115,5 +121,4 @@ in
     '';
     startAt = [ "*-*-* 03:00:00" ];
   };
-
 }
