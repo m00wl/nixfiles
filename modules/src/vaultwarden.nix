@@ -1,12 +1,15 @@
 { config, pkgs, lib, ...}:
 
 let
-  backupDir = "/data/backup/vw";
+  cfg = config.services.vaultwarden;
+  user = config.users.users.vaultwarden.name;
+  group = config.users.groups.vaultwarden.name;
 in
 {
+  # Enable Vaultwarden password manager
   services.vaultwarden = {
     enable = true;
-    backupDir = backupDir;
+    backupDir = "/data/backup/vw";
     config = {
       domain = "https://vw.lumme.de";
       signupsAllowed = false;
@@ -14,12 +17,18 @@ in
     };
   };
 
+  # Initialize backup dir
   systemd.tmpfiles.rules = [
-    "d ${backupDir} 0755 ${toString config.users.users.vaultwarden.name} ${toString config.users.groups.users.name} -"
+    "d ${cfg.backupDir} 0755 ${user} ${config.users.groups.users.name} -"
   ];
 
+  # Change backup time to 03 AM
+  systemd.timers.backup-vaultwarden.timerConfig.OnCalendar = "*-*-* 03:00:00";
+
+  # Add subdomain to base cert
   security.acme.certs."moritz.lumme.de".extraDomainNames = [ "vw.lumme.de" ];
 
+  # Configure reverse proxy
   services.nginx = {
     virtualHosts."vw.lumme.de" = {
       useACMEHost = "moritz.lumme.de";
@@ -39,7 +48,4 @@ in
       };
     };
   };
-
-  # Change backup time to 03 AM
-  systemd.timers.backup-vaultwarden.timerConfig.OnCalendar = "*-*-* 03:00:00";
 }
