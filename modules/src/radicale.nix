@@ -40,6 +40,9 @@ in
   services.radicale = {
     enable = true;
     settings = {
+      server = {
+        hosts = "localhost:5232";
+      };
       auth = {
         # Reverse proxy does http basic auth for us
         type = "http_x_remote_user";
