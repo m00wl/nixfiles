@@ -10,21 +10,29 @@ let
     echo "mirroring to github"
     GH_USER=$GL_USER
     GH_REPO=$(basename $GL_REPO)
-    if [ ! -f ~/github/pat_$GH_USER ]; then
+    if [ ! -f /run/secrets/github/$GH_USER-pat-mirror ]; then
       echo "error: no personal access token found"
       exit 1
     fi
-    GH_TOKEN=$(cat ${cfg.dataDir}/github/pat_$GH_USER)
+    GH_TOKEN=$(cat /run/secrets/github/$GH_USER-pat-mirror)
     git push --mirror https://$GH_TOKEN@github.com/$GH_USER/$GH_REPO.git
   '';
 in
 {
+  # Retrieve PATs from sops
+  sops.secrets."github/m00wl-pat-mirror" = {
+    sopsFile = ../../hosts/slnix/secrets.yaml;
+    owner = cfg.user;
+    group = cfg.group;
+  };
+
   # Enable gitolite service
   services.gitolite = {
     enable = true;
     user = "git";
     group = "git";
-    dataDir = "/srv/git";
+    # Default:
+    #dataDir = "/var/lib/gitolite";
     adminPubkey = builtins.elemAt admin.openssh.authorizedKeys.keys 0;
     extraGitoliteRc = ''
       $RC{UMASK} = 0027;
@@ -39,7 +47,6 @@ in
   # github-mirror hook
   # and backup dir
   systemd.tmpfiles.rules = [
-    "d ${cfg.dataDir}                             0750 ${cfg.user} ${cfg.group} -"
     "d ${cfg.dataDir}/local                       0750 ${cfg.user} ${cfg.group} -"
     "d ${cfg.dataDir}/local/commands              0750 ${cfg.user} ${cfg.group} -"
     "d ${cfg.dataDir}/local/hooks/                0750 ${cfg.user} ${cfg.group} -"
@@ -51,7 +58,7 @@ in
     "d ${cfg.dataDir}/local/syntactic-sugar       0750 ${cfg.user} ${cfg.group} -"
     "d ${cfg.dataDir}/local/triggers              0750 ${cfg.user} ${cfg.group} -"
     "d ${cfg.dataDir}/local/VREF                  0750 ${cfg.user} ${cfg.group} -"
-    "d ${backupDir}                               0755 ${cfg.user} ${toString config.users.groups.users.gid} -"
+    "d ${backupDir}                               0755 ${cfg.user} ${config.users.groups.users.name} -"
     "L ${cfg.dataDir}/local/hooks/repo-specific/github-mirror - - - - ${github-mirror}/bin/github-mirror"
   ];
 
@@ -106,8 +113,10 @@ in
     location = "";
   };
 
+  # Add subdomain to base cert
   security.acme.certs."moritz.lumme.de".extraDomainNames = [ config.services.nginx.gitweb.virtualHost ];
 
+  # Configure reverse proxy
   services.nginx.virtualHosts.${config.services.nginx.gitweb.virtualHost} = {
     useACMEHost = "moritz.lumme.de";
     forceSSL = true;
