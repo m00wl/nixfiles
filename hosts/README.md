@@ -1,12 +1,22 @@
 # Host Configurations
 
+## Structure
+
 This folder contains the configurations for each NixOS host.
-`hardware-configuration.nix` and `configuration.nix` for each machine are stored
-in subfolders on a per host basis.
+The `hardware-configuration.nix` and `configuration.nix` for each machine are
+stored in subfolders on a per host basis.
 Additional provisioning steps beyond the general process described below,
 if necessary, can be found there as well.
 Be sure to update `hardware-configuration.nix` if you transition a machine to
 different hardware!
+
+## Secrets
+
+Secrets are provisioned with [sops](https://github.com/mozilla/sops) using
+[sops-nix](https://github.com/Mic92/sops-nix).
+
+Host-independend secrets are collected in this top-level directory.
+Non-universal secrets should be moved to host-specific `secrets.yaml` files.
 
 ## Bootstrap Process
 
