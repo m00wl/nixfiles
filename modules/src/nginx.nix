@@ -33,7 +33,7 @@
 
   config.security.acme = {
     acceptTerms = true;
-    email = "acme@moritz.lumme.de";
+    defaults.email = "acme@moritz.lumme.de";
     certs."moritz.lumme.de" = {};
   };
 }
