@@ -20,8 +20,8 @@ Non-universal secrets should be moved to host-specific `secrets.yaml` files.
 
 ## Bootstrap Process
 
-This describes the general bootstrap process to provision a new system for the
-NixOS install:
+This describes the general bootstrap process to provision a new UEFI system for
+the NixOS install:
 
 Create a `DISK` variable for convenience:
 
