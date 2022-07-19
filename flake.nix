@@ -51,6 +51,23 @@
           sops-nix.nixosModules.sops
         ];
       };
+
+      nlnix = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/nlnix/configuration.nix
+          home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users = {
+              m00wl.imports = [
+                ./hosts/nlnix/home-m00wl.nix
+              ];
+            };
+          }
+          sops-nix.nixosModules.sops
+        ];
+      };
     };
   };
 }
