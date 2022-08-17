@@ -7,10 +7,5 @@
     ./src/vim.nix
     ./src/git.nix
     ./src/tmux.nix
-    ./src/gpg.nix
-  ];
-
-  home.packages = with pkgs; [
-    gopass
   ];
 }
