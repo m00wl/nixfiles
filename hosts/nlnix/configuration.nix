@@ -12,14 +12,13 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Define hostname
+  # Configure networking
   networking.hostName = "nlnix";
-  networking.hostId = "b028b71c";
+  networking.hostId = "737e8eaa";
+  networking.networkmanager.enable = true;
 
   # Set time zone
   time.timeZone = "Europe/Amsterdam";
-
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # List packages installed in system profile
   environment.systemPackages = with pkgs; [
