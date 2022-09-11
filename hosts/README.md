@@ -18,7 +18,7 @@ Non-universal secrets should be moved to host-specific `secrets.yaml` files in t
 
 ### UEFI Systems
 
-This describes the general bootstrap process to provision a new UEFI system for the NixOS install:
+This section describes the general bootstrap process to provision a new UEFI system for the NixOS install:
 
 Create a `DISK` variable for convenience:
 
@@ -135,11 +135,118 @@ Generate NixOS configuration:
 nixos-generate-config --root /mnt
 ```
 
-Edit generated configuration:
+Follow the configuration and installation steps below.
+
+### Raspberry Pis
+
+This section describes the general bootstrap process to provision a Raspberry Pi system for the NixOS install:
+
+This is largely based on the guide from the wiki: [NixOS on ARM/Raspberry Pi 3](https://nixos.wiki/wiki/NixOS_on_ARM/Raspberry_Pi_3).
+
+The SD-card images already contain an `ext4`-formatted root partition that automatically resizes on first boot.
+Custom images can be built with the `0lnix` host configuration in this repository.
+
+For the external hard drive, create a `DISK` variable for convenience:
+
+```bash
+DISK=/dev/disk/by-id/...
+```
+
+If necessary, delete ZFS labels and zap already exisiting GPT and MBR partitions:
+
+```bash
+zpool labelclear $DISK
+sgdisk -Z $DISK
+```
+
+Partition the disk with the following layout:
+
+| Number  | Size                  | Description            |
+| ------- | --------------------- | ---------------------- |
+| 1       | RAM size              | Linux swap (optional)  |
+| 2       | remaining disk space  | ZFS                    |
+
+```bash
+sgdisk      \
+ -n 1:0:+8G \
+ -N 2       \
+ -t 1:8200  \
+ -t 2:BF01  \
+ $DISK
+```
+
+Create ZFS data pool:
+
+```bash
+zpool create               \
+    -o ashift=12           \
+    -o autotrim=on         \
+    -O acltype=posixacl    \
+    -O canmount=off        \
+    -O compression=zstd    \
+    -O dnodesize=auto      \
+    -O normalization=formD \
+    -O relatime=on         \
+    -O xattr=sa            \
+    -O mountpoint=/data    \
+    dpool                  \
+    $DISK-part2
+```
+
+Create ZFS datasets.
+Be sure to adapt the size of the `reserved` dataset appropriately:
+
+```bash
+zfs create                     \
+ -o mountpoint=none            \
+ -o refreservation=64G         \
+ dpool/reserved
+zfs create                     \
+ -o canmount=off               \
+ -o mountpoint=none            \
+ -o encryption=on              \
+ -o keylocation=prompt         \
+ -o keyformat=passphrase       \
+ dpool/data
+zfs create                     \
+ -o canmount=on                \
+ -o mountpoint=/data           \
+ -o com.sun:auto-snapshot=true \
+ dpool/data/root
+```
+
+Prepare `swap` partition:
+
+```bash
+mkswap -L swap $DISK-part1
+swapon $DISK-part1
+```
+
+Generate NixOS configuration (mainly in order to collect filesystem mounts in `hardware-configuration.nix`):
+
+```bash
+nixos-generate-config
+```
+
+Follow the configuration steps below.
+
+Afterwards, set `root` password and activate the new configuration.
+Important: Be sure not to use `nixos-install` but rather just build the configuration manually.
+This is due to the nature of the SD-card image that already deploys a ready-to-go system:
+
+```bash
+passwd
+nixos-rebuild switch
+```
+
+### Configuration
+
+This section describes the process of tweaking the generated configuration in order to prepare the installation of the flake-based configuration from this repository.
 
 - `hardware-configuration.nix`:
 
-  - enable ZFS mounts:
+  Enable ZFS mounts:
+
   ```bash
   sed                                                                                \
    -i 's|fsType = "zfs";|fsType = "zfs"; options = [ "zfsutil" "X-mount.mkdir" ];|g' \
@@ -148,7 +255,8 @@ Edit generated configuration:
 
 - `extra-configuration.nix`:
 
-  - prepare additional configuration file:
+  Prepare additional configuration file:
+
   ```bash
   sed                                                                                           \
    -i "s|./hardware-configuration.nix|./hardware-configuration.nix ./extra-configuration.nix|g" \
@@ -160,7 +268,8 @@ Edit generated configuration:
   EOF
   ```
 
-  - enable ZFS support:
+  Enable ZFS support:
+
   ```bash
   tee -a /mnt/etc/nixos/extra-configuration.nix <<EOF
     boot.supportedFilesystems = [ "zfs" ];
@@ -169,7 +278,8 @@ Edit generated configuration:
   EOF
   ```
 
-  - enable flakes support:
+  Enable flakes support:
+
   ```bash
   tee -a /mnt/etc/nixos/extra-configuration.nix <<EOF
     nix = {
@@ -180,19 +290,21 @@ Edit generated configuration:
     };
   EOF
   ```
-  - create user account:
+
+  Create user account:
+
   ```bash
-  USERPWD=$(mkpasswd -m SHA-512 -s)
   tee -a /mnt/etc/nixos/extra-configuration.nix <<EOF
     users.users.m00wl = {
       isNormalUser = true;
       extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-      initialHashedPassword = "${USERPWD}";
+      initialHashedPassword = "$(mkpasswd -m SHA-512 -s)";
     };
   EOF
   ```
 
-  - finish additional configuration file:
+  Finish additional configuration file:
+
   ```bash
   tee -a /mnt/etc/nixos/extra-configuration.nix <<EOF
   }
@@ -201,7 +313,9 @@ Edit generated configuration:
 
 - `configuration.nix`:
 
-  - add minimal system information (`networking.hostname`, `time.timezone`, etc.)
+  Add minimal system information (`networking.hostname`, `time.timezone`, etc.)
+
+### Installation
 
 Install NixOS:
 
