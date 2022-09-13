@@ -5,6 +5,7 @@
     [
       ./hardware-configuration.nix
       ../../modules/core.nix
+      ../../modules/src/rpi.nix
       ../../modules/src/zeus.nix
       ../../modules/src/nginx.nix
       ../../modules/src/fail2ban.nix
@@ -13,21 +14,18 @@
       ../../modules/src/radicale.nix
     ];
 
-  # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
-  boot.loader.grub.enable = false;
-  # Enable the generation of /boot/extlinux/extlinux.conf
-  boot.loader.generic-extlinux-compatible.enable = true;
-
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.blacklistedKernelModules = [
-    # disable wifi
-    "brcmfmac" "brcmutil" "cfg80211" "rfkill"
-    # disable bt
-    "btbcm" "hci_uart" "ecc" "ecdh_generic" "bluetooth"
-    # disable i2c
-    "i2c-bcm2835"
-  ];
-  boot.plymouth.enable = true;
+  boot.loader = {
+    grub.enable = false;
+    generic-extlinux-compatible.enable = false;
+    raspberryPi = {
+      enable = true;
+      version = 3;
+      firmwareConfig = ''
+        dtoverlay=disable-wifi
+        dtoverlay=disable-bt
+      '';
+    };
+  };
 
   # Configure networking for DMZ
   networking = {
