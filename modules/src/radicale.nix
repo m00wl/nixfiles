@@ -77,7 +77,6 @@ in
   services.nginx = {
     virtualHosts."rc.lumme.de" = {
       useACMEHost = "moritz.lumme.de";
-      forceSSL = true;
       locations."/" = {
         proxyPass = "http://localhost:5232";
         extraConfig = ''

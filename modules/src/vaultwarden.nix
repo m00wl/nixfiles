@@ -32,7 +32,6 @@ in
   services.nginx = {
     virtualHosts."vw.lumme.de" = {
       useACMEHost = "moritz.lumme.de";
-      forceSSL = true;
       basicAuthFile = lib.mkForce null;
       locations."/" = {
         proxyPass = "http://localhost:8000";

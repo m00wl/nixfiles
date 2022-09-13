@@ -119,7 +119,6 @@ in
   # Configure reverse proxy
   services.nginx.virtualHosts.${config.services.nginx.gitweb.virtualHost} = {
     useACMEHost = "moritz.lumme.de";
-    forceSSL = true;
   };
 
   # Point gitweb to bare repos

@@ -1,7 +1,7 @@
 { config, pkgs, lib, ...}:
 
 {
-  config.networking.firewall.allowedTCPPorts = [ 443 ];
+  config.networking.firewall.allowedTCPPorts = [ 80 443 ];
 
   # Retrieve htpasswd from sops-nix
   config.sops.secrets."nginx/htpasswd" = {
@@ -11,9 +11,12 @@
     group = config.services.nginx.group;
   };
 
-  # Make all virtualHosts default to http basic auth
+  # virtualHost defaults:
+  # https redirect
+  # http basic auth
   options.services.nginx.virtualHosts = lib.mkOption {
     type = lib.types.attrsOf (lib.types.submodule {
+      forceSSL = true;
       basicAuthFile = "/run/secrets/nginx/htpasswd";
     });
   };
@@ -27,7 +30,6 @@
     logError = "stderr info";
     virtualHosts."moritz.lumme.de" = {
       enableACME = true;
-      forceSSL = true;
     };
   };
 
