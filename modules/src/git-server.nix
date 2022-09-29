@@ -3,6 +3,7 @@
 let
   cfg = config.services.gitolite;
   admin = config.users.users.m00wl;
+  dmn = "git.lumme.de";
   backupDir = "/data/backup/git";
   github-mirror = pkgs.writeShellScriptBin "github-mirror" ''
     set -eu
@@ -109,15 +110,15 @@ in
   services.nginx.gitweb = {
     enable = true;
     group = cfg.group;
-    virtualHost = "git.lumme.de";
+    virtualHost = dmn;
     location = "";
   };
 
   # Add subdomain to base cert
-  security.acme.certs."moritz.lumme.de".extraDomainNames = [ config.services.nginx.gitweb.virtualHost ];
+  security.acme.certs."moritz.lumme.de".extraDomainNames = [ dmn ];
 
   # Configure reverse proxy
-  services.nginx.virtualHosts.${config.services.nginx.gitweb.virtualHost} = {
+  services.nginx.virtualHosts.${dmn} = {
     useACMEHost = "moritz.lumme.de";
   };
 
@@ -127,8 +128,8 @@ in
     extraConfig = ''
       $projects_list = "${cfg.dataDir}/projects.list";
       $strict_export = true;
-      $home_link_str = "git.lumme.de";
-      $site_name = "git.lumme.de";
+      $home_link_str = "${dmn}";
+      $site_name = "${dmn}";
       $omit_owner = true;
     '';
   };
