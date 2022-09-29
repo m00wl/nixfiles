@@ -4,6 +4,7 @@ let
   cfg = config.services.vaultwarden;
   user = config.users.users.vaultwarden.name;
   group = config.users.groups.vaultwarden.name;
+  dmn = "vw.lumme.de";
 in
 {
   # Enable Vaultwarden password manager
@@ -11,7 +12,7 @@ in
     enable = true;
     backupDir = "/data/backup/vw";
     config = {
-      domain = "https://vw.lumme.de";
+      domain = "https://" + dmn;
       signupsAllowed = false;
       websocketEnabled = true;
     };
@@ -26,11 +27,11 @@ in
   systemd.timers.backup-vaultwarden.timerConfig.OnCalendar = "*-*-* 03:00:00";
 
   # Add subdomain to base cert
-  security.acme.certs."moritz.lumme.de".extraDomainNames = [ "vw.lumme.de" ];
+  security.acme.certs."moritz.lumme.de".extraDomainNames = [ dmn ];
 
   # Configure reverse proxy
   services.nginx = {
-    virtualHosts."vw.lumme.de" = {
+    virtualHosts."${dmn}" = {
       useACMEHost = "moritz.lumme.de";
       basicAuthFile = lib.mkForce null;
       locations."/" = {
