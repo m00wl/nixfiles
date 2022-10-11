@@ -12,10 +12,28 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, sops-nix, nixos-hardware }: {
+  outputs = { self, nixpkgs, home-manager, sops-nix, nixos-hardware, nixos-generators, ... }: {
     nixosConfigurations = {
+      #"0lnix" = nixpkgs.lib.nixosSystem {
+      #  system = "x86_64-linux";
+      #  modules = [
+      #    #"${nixpkgs}/nixos/modules/installer/sd-card/sd-image-raspberrypi.nix"
+      #    "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+      #    #"${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+      #    {
+      #      imports = [
+      #        ./hosts/0lnix/configuration.nix
+      #      ];
+      #    }
+      #  ];
+      #};
+
       vlnix = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
@@ -86,6 +104,24 @@
           }
           sops-nix.nixosModules.sops
         ];
+      };
+    };
+
+    #images."0lnix" = nixosConfigurations."0lnix".config.system.build.sdImage;
+    images = {
+      install-iso = nixos-generators.nixosGenerate {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/0lnix/configuration.nix
+        ];
+        format = "install-iso";
+      };
+      sd-card = nixos-generators.nixosGenerate {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/0lnix/configuration.nix
+        ];
+        format = "sd-aarch64-installer";
       };
     };
   };
