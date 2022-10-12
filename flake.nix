@@ -20,20 +20,6 @@
 
   outputs = { self, nixpkgs, home-manager, sops-nix, nixos-hardware, nixos-generators, ... }: {
     nixosConfigurations = {
-      #"0lnix" = nixpkgs.lib.nixosSystem {
-      #  system = "x86_64-linux";
-      #  modules = [
-      #    #"${nixpkgs}/nixos/modules/installer/sd-card/sd-image-raspberrypi.nix"
-      #    "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-      #    #"${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
-      #    {
-      #      imports = [
-      #        ./hosts/0lnix/configuration.nix
-      #      ];
-      #    }
-      #  ];
-      #};
-
       vlnix = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
@@ -107,7 +93,6 @@
       };
     };
 
-    #images."0lnix" = nixosConfigurations."0lnix".config.system.build.sdImage;
     images = {
       install-iso = nixos-generators.nixosGenerate {
         system = "x86_64-linux";
