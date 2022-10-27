@@ -4,6 +4,7 @@
   imports =
     [
       ./hardware-configuration.nix
+      ./backup.nix
       ../../modules/core.nix
       ../../modules/src/rpi.nix
       ../../modules/src/zeus.nix
