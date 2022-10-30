@@ -4,6 +4,7 @@
   imports =
     [
       ./hardware-configuration.nix
+      ./backup.nix
       ../../modules/core.nix
       ../../modules/src/rpi.nix
       ../../modules/src/wifi.nix
@@ -15,9 +16,9 @@
     raspberryPi = {
       enable = true;
       version = 4;
-      #firmwareConfig = ''
-      #
-      #'';
+      firmwareConfig = ''
+        dtoverlay=disable-bt
+      '';
     };
   };
 
@@ -33,10 +34,10 @@
   networking = {
     hostName = "hlnix";
     hostId = "795a8675";
-    wireless = {
-      networks."@SSID_DEV@".psk = "@PSK_DEV@";
-      networks."@SSID_HOME@".psk = "@PSK_HOME@";
-      networks."@SSID_WG@".psk = "@PSK_WG@";
+    wireless.networks = {
+      "@SSID_DEV@".psk = "@PSK_DEV@";
+      "@SSID_HOME@".psk = "@PSK_HOME@";
+      "@SSID_WG@".psk = "@PSK_WG@";
     };
   };
 

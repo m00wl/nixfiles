@@ -5,14 +5,6 @@ keys:
   - &h_nlnix age154mqxs6jywv3tlspcw3lm5h96r8efkjfpdayzerqvuavav2p05jqeuq5h2
   - &h_hlnix age1x8rtf2gcfk5s6fpnrwr2hnu5dm9lmgu8xc7wugxhejmp0mjnmc4qc6dxaf
 creation_rules:
-  - path_regex: secrets.yaml$
-    key_groups:
-      - age:
-        - *u_m00wl
-        - *h_vlnix
-        - *h_slnix
-        - *h_nlnix
-        - *h_hlnix
   - path_regex: vlnix/secrets.yaml$
     key_groups:
       - age:
@@ -32,4 +24,12 @@ creation_rules:
     key_groups:
       - age:
         - *u_m00wl
+        - *h_hlnix
+  - path_regex: secrets.yaml$
+    key_groups:
+      - age:
+        - *u_m00wl
+        - *h_vlnix
+        - *h_slnix
+        - *h_nlnix
         - *h_hlnix
