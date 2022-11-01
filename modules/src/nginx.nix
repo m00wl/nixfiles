@@ -30,6 +30,8 @@
     logError = "stderr info";
     virtualHosts."moritz.lumme.de" = {
       enableACME = true;
+      root = "/var/www/moritz.lumme.de";
+      basicAuthFile = lib.mkForce null;
     };
   };
 
