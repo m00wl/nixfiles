@@ -5,6 +5,7 @@
     [
       ./hardware-configuration.nix
       ../../modules/core.nix
+      ../../modules/src/zfs.nix
       ../../modules/gui.nix
     ];
 

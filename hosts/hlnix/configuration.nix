@@ -6,6 +6,7 @@
       ./hardware-configuration.nix
       ./backup.nix
       ../../modules/core.nix
+      ../../modules/src/zfs.nix
       ../../modules/src/rpi.nix
       ../../modules/src/wifi.nix
     ];
