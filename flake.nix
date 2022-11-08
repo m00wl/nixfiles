@@ -91,6 +91,24 @@
           sops-nix.nixosModules.sops
         ];
       };
+
+      blnix = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/blnix/configuration.nix
+          home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users = {
+              m00wl.imports = [
+                ./hosts/blnix/home-m00wl.nix
+              ];
+            };
+          }
+          sops-nix.nixosModules.sops
+        ];
+      };
+
     };
 
     images = {
