@@ -21,7 +21,7 @@ in
     data = {
       paths = "/data";
       environment.BORG_RSH = "ssh -i /run/secrets/backup/ssh-key";
-      repo = "borg@backup.lumme.de:/srv/backup/slnix";
+      repo = "borg@bak.lumme.de:/srv/backup/slnix";
       encryption = {
         mode = "repokey";
         passCommand = "cat /run/secrets/backup/repo-pwd";
