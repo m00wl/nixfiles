@@ -6,21 +6,22 @@
       ./hardware-configuration.nix
       ./backup.nix
       ../../modules/core.nix
-      ../../modules/src/zfs.nix
       ../../modules/src/rpi.nix
       ../../modules/src/wifi.nix
     ];
 
   boot.loader = {
     grub.enable = false;
-    generic-extlinux-compatible.enable = false;
-    raspberryPi = {
-      enable = true;
-      version = 4;
-      firmwareConfig = ''
-        dtoverlay=disable-bt
-      '';
-    };
+    generic-extlinux-compatible.enable = true;
+    # Don't use RPi bootloader, due to https://discourse.nixos.org/t/raspberry-pi-boot-loader-raspberrypi-firmwareconfig-not-taking-effect/19692
+    # Notice that this requires firmwareConfig to be applied manually!
+    #raspberryPi = {
+    #  enable = true;
+    #  version = 4;
+    #  firmwareConfig = ''
+    #    dtoverlay=disable-bt
+    #  '';
+    #};
   };
 
   # Set your time zone.
@@ -34,7 +35,6 @@
 
   networking = {
     hostName = "hlnix";
-    hostId = "795a8675";
     wireless.networks = {
       "@SSID_DEV@".psk = "@PSK_DEV@";
       "@SSID_HOME@".psk = "@PSK_HOME@";
