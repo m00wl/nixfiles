@@ -18,15 +18,17 @@
 
   boot.loader = {
     grub.enable = false;
-    generic-extlinux-compatible.enable = false;
-    raspberryPi = {
-      enable = true;
-      version = 3;
-      firmwareConfig = ''
-        dtoverlay=disable-wifi
-        dtoverlay=disable-bt
-      '';
-    };
+    generic-extlinux-compatible.enable = true;
+    # Don't use RPi bootloader, due to https://discourse.nixos.org/t/raspberry-pi-boot-loader-raspberrypi-firmwareconfig-not-taking-effect/19692
+    # Notice that this requires firmwareConfig to be applied manually!
+    #raspberryPi = {
+    #  enable = true;
+    #  version = 3;
+    #  firmwareConfig = ''
+    #    dtoverlay=disable-wifi
+    #    dtoverlay=disable-bt
+    #  '';
+    #};
   };
 
   # Configure networking for DMZ
