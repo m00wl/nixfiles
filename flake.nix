@@ -74,24 +74,6 @@
         ];
       };
 
-      hlnix = nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
-        modules = [
-          ./hosts/hlnix/configuration.nix
-          nixos-hardware.nixosModules.raspberry-pi-4
-          home-manager.nixosModules.home-manager {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users = {
-              m00wl.imports = [
-                ./hosts/hlnix/home-m00wl.nix
-              ];
-            };
-          }
-          sops-nix.nixosModules.sops
-        ];
-      };
-
       blnix = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
