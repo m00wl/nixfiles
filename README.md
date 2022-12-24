@@ -6,13 +6,13 @@ This repository contains my NixOS system configurations.
 
 The repository adheres to the following structure:
 
-- `hosts/`: system/user/hardware configuration + bootstrap process for each
-machine
-
-- `users/`: home-manager configuration + dotfiles for each user
-
-- `modules/`: modular, reusable nix expressions
-
-- `flake.nix`: top-level nix flake containing system configurations
-
-- `flake.lock`: lock file of top-level nix flake
+```bash
+.
+├── flake.lock  # nix flake.
+├── flake.nix   # nix flake lock file.
+├── hosts       # host configuration and documentation (system, hardware, bootstrap, etc.).
+├── LICENSE.md  # license.
+├── modules     # reusable nix expressions (host-agnostic).
+├── README.md   # readme.
+└── users       # user configuration (home-manager, dotfiles, etc.).
+```
