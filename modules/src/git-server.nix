@@ -60,7 +60,7 @@ in
     "d ${cfg.dataDir}/local/triggers              0750 ${cfg.user} ${cfg.group} -"
     "d ${cfg.dataDir}/local/VREF                  0750 ${cfg.user} ${cfg.group} -"
     "d ${backupDir}                               0755 ${cfg.user} ${config.users.groups.users.name} -"
-    "L ${cfg.dataDir}/local/hooks/repo-specific/github-mirror - - - - ${github-mirror}/bin/github-mirror"
+    "L+ ${cfg.dataDir}/local/hooks/repo-specific/github-mirror - - - - ${github-mirror}/bin/github-mirror"
   ];
 
   # Set default branch name to main
@@ -73,6 +73,7 @@ in
         };
       };
     };
+    home.stateVersion = "21.11";
   };
 
   # Configure automatic backup service
