@@ -8,11 +8,12 @@ The repository adheres to the following structure:
 
 ```bash
 .
-├── flake.lock  # nix flake.
-├── flake.nix   # nix flake lock file.
-├── hosts       # host configuration and documentation (system, hardware, bootstrap, etc.).
+├── hosts       # host configurations (system, hardware, bootstrap, etc.).
+├── modules     # reusable nix expressions (mostly host-agnostic).
+├── packages    # self-packaged software.
+├── users       # user configuration (home-manager, dotfiles, etc.).
+├── flake.nix   # nix flake.
+├── flake.lock  # nix flake lock file.
 ├── LICENSE.md  # license.
-├── modules     # reusable nix expressions (host-agnostic).
-├── README.md   # readme.
-└── users       # user configuration (home-manager, dotfiles, etc.).
+└── README.md   # readme.
 ```
