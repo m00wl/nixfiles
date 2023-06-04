@@ -34,6 +34,10 @@
       ConfigureWithoutCarrier = "yes";
     };
   };
+  services.resolved.enable = false;
+  networking.resolvconf.extraConfig = ''
+    prepend_nameservers="8.8.8.8"
+  '';
 
   system.stateVersion = "22.05";
 }
