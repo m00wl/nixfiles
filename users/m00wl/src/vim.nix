@@ -1,12 +1,9 @@
 { pkgs, ... }:
 
 {
-  home.sessionVariables = {
-    EDITOR = "vim";
-  };
-
   programs.vim = {
     enable = true;
+    defaultEditor = true;
 
     settings = {
       modeline = false;
@@ -34,29 +31,26 @@
       nnoremap <F3> :set wrap! wrap?<CR>
       imap <F3> <C-O><F3>
 
-
-      " map <F4> to toggle overlines
-      let s:overlines = 0
-      fun! Toggle_overlines()
-        if s:overlines == 0
-          let s:overlines = 1
-          match ErrorMsg '\%>80v.\+'
-          echo "  overlines"
+      " map <F4> to toggle line markers
+      highlight ColorColumn ctermbg=gray
+      let s:linemarkers = 0
+      fun! ToggleLineMarkers()
+        if s:linemarkers == 0
+          let s:linemarkers = 1
+          set cc=81,101
+          echo '  linemarkers'
         else
-          let s:overlines = 0
-          match none
-          echo "nooverlines"
+          let s:linemarkers = 0
+          set cc=
+          echo 'nolinemarkers'
         endif
       endfun
 
-      nnoremap <F4> :call Toggle_overlines()<CR>
+      nnoremap <F4> :call ToggleLineMarkers()<CR>
       imap <F4> <C-O><F4>
 
-      " set listchars, showbreak,
-      " and map <F5> to toggle list mode
-      set listchars=tab:>·,space:·,trail:!,precedes:<,extends:>,eol:$
-      "let &showbreak = '> '
-      nnoremap <F5> :set list! list?<CR>
+      " set listchars and map <F5> to toggle list mode
+      nnoremap <F5> :set list! lcs=tab:>·,space:·,trail:!,precedes:<,extends:>,eol:$ list?<CR>
       imap <F5> <C-O><F5>
     '';
   };
