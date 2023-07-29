@@ -137,11 +137,11 @@
                     | tmux load-buffer - ; tmux paste-buffer"
 
       # apply theme from TMUX_ACC_CLR
-      set -g status-style fg=black,bg=colour"$TMUX_ACC_CLR"
-      set -g message-command-style fg=black,bg=colour"$TMUX_ACC_CLR"
-      set -g message-style fg=black,bg=colour"$TMUX_ACC_CLR"
-      set -g mode-style fg=black,bg=colour"$TMUX_ACC_CLR"
-      set -g pane-active-border-style fg=colour"$TMUX_ACC_CLR",bg=black,bold
+      set -g status-style bg=colour"$TMUX_ACC_CLR"
+      set -g message-command-style bg=colour"$TMUX_ACC_CLR"
+      set -g message-style bg=colour"$TMUX_ACC_CLR"
+      set -g mode-style bg=colour"$TMUX_ACC_CLR"
+      set -g pane-active-border-style fg=colour"$TMUX_ACC_CLR"
     '';
 
   };
