@@ -8,4 +8,8 @@
     ./src/git.nix
     ./src/tmux.nix
   ];
+
+  home.shellAliases = {
+    grep = "grep --color=auto";
+  };
 }
