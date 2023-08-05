@@ -19,6 +19,23 @@
   };
 
   outputs = { self, nixpkgs, home-manager, sops-nix, nixos-hardware, nixos-generators, ... }: {
+    homeConfigurations = {
+      cli = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        modules = [
+          ./users/m00wl/base.nix
+          ./users/m00wl/cli.nix
+        ];
+      };
+      gui = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        modules = [
+          ./users/m00wl/base.nix
+          ./users/m00wl/cli.nix
+          ./users/m00wl/gui.nix
+        ];
+      };
+    };
     nixosConfigurations = {
       vlnix = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
