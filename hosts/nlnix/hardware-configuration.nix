@@ -26,11 +26,13 @@
   fileSystems."/home" =
     { device = "rpool/nixos/home";
       fsType = "zfs";
+      options = [ "zfsutil" "X-mount.mkdir" ];
     };
 
   fileSystems."/tmp" =
     { device = "rpool/nixos/tmp";
       fsType = "zfs";
+      options = [ "zfsutil" "X-mount.mkdir" ];
     };
 
   fileSystems."/boot" =
