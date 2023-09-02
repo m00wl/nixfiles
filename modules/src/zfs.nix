@@ -1,14 +1,13 @@
-{ config, pkgs, ...}:
-
 {
-  # Enable zfs
+  # Enable zfs.
   boot.supportedFilesystems = [ "zfs" ];
 
-  # Enable zfs services
-  services.zfs.trim.enable = true;
-  services.zfs.autoScrub.enable = true;
-  services.zfs.autoSnapshot.enable = true;
+  # Enable zfs services.
+  services.zfs = {
+    trim.enable = true;
+    autoScrub.enable = true;
+    autoSnapshot.enable = true;
+  };
 
-  # Remember to set 'networking.hostId' to $(head -c 8 /etc/machine-id)
-  # in configuration.nix
+  # Remember to set 'networking.hostId' to $(head -c 8 /etc/machine-id).
 }

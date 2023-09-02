@@ -5,13 +5,12 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ./openvz.nix
-      ./backup.nix
-      ../../modules/core.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ./home-configuration.nix
+    ./openvz.nix
+    ./backup.nix
+  ];
 
   networking.hostName = "blnix";
 

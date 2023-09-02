@@ -1,6 +1,5 @@
-{ stdenv, ... }:
-
-stdenv.mkDerivation {
+{ pkgs, ... }:
+pkgs.stdenv.mkDerivation {
   name = "self-flake";
   src = ../.;
   installPhase = ''

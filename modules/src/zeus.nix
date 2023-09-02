@@ -1,7 +1,5 @@
-{ config, pkgs, ... }:
-
 {
-  # Create zeus user account
+  # Create 'zeus' user account.
   users.users.zeus = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];

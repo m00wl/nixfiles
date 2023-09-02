@@ -1,7 +1,6 @@
-{ config, pkgs, ... }:
-
+{ config, ... }:
 {
-  # Create m00wl user account 
+  # Create 'm00wl' user account.
   users.users.m00wl = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
@@ -10,6 +9,7 @@
     ];
   };
 
+  # m00wl's secrets.
   sops.secrets = {
     "ssh/home" = {
       owner = config.users.users.m00wl.name;

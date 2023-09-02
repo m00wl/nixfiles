@@ -1,5 +1,4 @@
 { config, pkgs, ...}:
-
 let
   cfg = config.services.gitolite;
   admin = config.users.users.m00wl;

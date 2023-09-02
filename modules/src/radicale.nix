@@ -1,10 +1,10 @@
-{ config, pkgs, lib, ... }:
-
+{ config, pkgs, ... }:
 let
   cfg = config.services.radicale;
   user = config.users.users.radicale.name;
   group = config.users.groups.radicale.name;
-  # Radicale initialization
+  dmn = "rc.lumme.de";
+  # Radicale initialization.
   radicale-init = pkgs.writeShellScriptBin "radicale-init" ''
     set -eu
     set -o pipefail
@@ -31,12 +31,12 @@ let
     fi
   '';
 
-  # Radicale locations
+  # Radicale locations.
   runtimeDir = "/var/lib/radicale/collections";
   backupDir = "/data/backup/rc";
 in
 {
-  # Enable Radicale CalDAV/CardDAV server
+  # Enable Radicale CalDAV/CardDAV server.
   services.radicale = {
     enable = true;
     settings = {
@@ -44,11 +44,11 @@ in
         hosts = "localhost:5232";
       };
       auth = {
-        # Reverse proxy does http basic auth for us
+        # Reverse proxy does http basic auth for us.
         type = "http_x_remote_user";
       };
       storage =
-        # Configure automatic git commit on every write to storage
+        # Configure automatic git commit on every write to storage.
         let
           git = "${pkgs.git}/bin/git";
         in {
@@ -58,24 +58,22 @@ in
           filesystem_folder = runtimeDir;
       };
       web = {
-        # Disable web interface
+        # Disable web interface.
         type = "none";
       };
     };
-    rights = {
-
-    };
+    rights = {};
   };
 
-  # Initialize git repo for versioning of changes
+  # Initialize git repo for versioning of changes.
   systemd.services.radicale.preStart = "${radicale-init}/bin/radicale-init ${runtimeDir}";
 
-  # Add subdomain to base cert
-  security.acme.certs."moritz.lumme.de".extraDomainNames = [ "rc.lumme.de" ];
+  # Add subdomain to base cert.
+  security.acme.certs."moritz.lumme.de".extraDomainNames = [ dmn ];
 
-  # Configure reverse proxy
+  # Configure reverse proxy.
   services.nginx = {
-    virtualHosts."rc.lumme.de" = {
+    virtualHosts."${dmn}" = {
       useACMEHost = "moritz.lumme.de";
       locations."/" = {
         proxyPass = "http://localhost:5232";
@@ -89,12 +87,12 @@ in
     };
   };
 
-  # Initialize runtime and backup dirs
+  # Initialize runtime and backup dirs.
   systemd.tmpfiles.rules = [
     "d ${backupDir} 0755 ${user} ${config.users.groups.users.name} -"
   ];
 
-  # Backup
+  # Backup.
   systemd.services.radicale-backup = {
     description = "Periodic backup of radicale collections";
     wantedBy = [ "multi-user.target" ];

@@ -1,7 +1,6 @@
-{ config, pkgs, ... }:
-
+{ self, config, pkgs, ... }:
 let
-  current-flake = pkgs.callPackage ../../packages/self-flake.nix {};
+  current-flake = pkgs.callPackage self.packages.self-flake {};
 in
 {
   config.system.extraSystemBuilderCmds = ''

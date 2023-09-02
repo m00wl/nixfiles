@@ -1,7 +1,5 @@
-{ config, pkgs, ... }:
-
 {
-  # Enable sound
+  # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 }

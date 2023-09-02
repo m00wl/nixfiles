@@ -8,7 +8,7 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
@@ -16,25 +16,21 @@
   fileSystems."/" =
     { device = "rpool/nixos/root";
       fsType = "zfs";
-      options = [ "zfsutil" "X-mount.mkdir" ];
-    };
-
-  fileSystems."/home" =
-    { device = "rpool/nixos/home";
-      fsType = "zfs";
-      options = [ "zfsutil" "X-mount.mkdir" ];
     };
 
   fileSystems."/nix" =
     { device = "rpool/nixos/nix";
       fsType = "zfs";
-      options = [ "zfsutil" "X-mount.mkdir" ];
+    };
+
+  fileSystems."/home" =
+    { device = "rpool/nixos/home";
+      fsType = "zfs";
     };
 
   fileSystems."/tmp" =
     { device = "rpool/nixos/tmp";
       fsType = "zfs";
-      options = [ "zfsutil" "X-mount.mkdir" ];
     };
 
   fileSystems."/boot" =
@@ -55,5 +51,6 @@
   # networking.interfaces.wlp3s0.useDHCP = lib.mkDefault true;
   # networking.interfaces.wwp0s20u4i6.useDHCP = lib.mkDefault true;
 
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

@@ -1,30 +1,29 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ../../modules/core.nix
-      ../../modules/src/zfs.nix
-      ../../modules/gui.nix
-      ../../modules/src/watchy.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ./home-configuration.nix
+    ../../modules/src/zfs.nix
+  ];
 
-  # Use systemd-boot EFI boot loader
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # Use systemd-boot EFI boot loader.
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
 
-  # Define hostname
-  networking.hostName = "vlnix";
-  networking.hostId = "65809531";
+  # Configure networking.
+  networking = {
+    hostName = "vlnix";
+    hostId = "65809531";
+    networkmanager.enable = true;
+  };
 
-  # Set time zone
+  # Set time zone.
   time.timeZone = "Europe/Amsterdam";
 
-  # Enable DHCP
-  networking.interfaces.enp0s3.useDHCP = true;
-
-  # List packages installed in system profile
+  # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
     vim
     wget

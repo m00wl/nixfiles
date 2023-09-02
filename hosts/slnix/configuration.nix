@@ -4,8 +4,9 @@
   imports =
     [
       ./hardware-configuration.nix
+      ./home-configuration.nix
       ./backup.nix
-      ../../modules/core.nix
+      #../../modules/base.nix
       ../../modules/src/zfs.nix
       ../../modules/src/rpi.nix
       ../../modules/src/zeus.nix
@@ -19,7 +20,7 @@
   boot.loader = {
     grub.enable = false;
     generic-extlinux-compatible.enable = true;
-    # Don't use RPi bootloader, due to https://discourse.nixos.org/t/raspberry-pi-boot-loader-raspberrypi-firmwareconfig-not-taking-effect/19692
+    # Don't use RPi bootloader, due to https://discourse.nixos.org/t/raspberry-pi-boot-loader-raspberrypi-firmwareconfig-not-taking-effect/19692.
     # Notice that this requires firmwareConfig to be applied manually!
     #raspberryPi = {
     #  enable = true;
@@ -31,7 +32,7 @@
     #};
   };
 
-  # Configure networking for DMZ
+  # Configure networking for DMZ.
   networking = {
     hostName = "slnix";
     hostId = "c416237d";
@@ -54,10 +55,10 @@
     ];
   };
 
-  # Set time zone
+  # Set time zone.
   time.timeZone = "Europe/Amsterdam";
 
-  # List packages installed in system profile
+  # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
     vim
     wget

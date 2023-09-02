@@ -1,5 +1,3 @@
-{ config, pkgs, ... }:
-
 {
   sops.secrets."wifi/wireless.env" = {};
 

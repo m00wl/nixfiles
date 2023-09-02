@@ -1,5 +1,3 @@
-{ pkgs, config, ... }:
-
 {
   home.sessionVariables = {
     TMUX_ACC_CLR = ''

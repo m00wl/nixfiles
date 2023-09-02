@@ -1,5 +1,4 @@
-{ config, pkgs, lib, ...}:
-
+{ config, lib, ...}:
 let
   cfg = config.services.vaultwarden;
   user = config.users.users.vaultwarden.name;
@@ -7,7 +6,7 @@ let
   dmn = "vw.lumme.de";
 in
 {
-  # Enable Vaultwarden password manager
+  # Enable Vaultwarden password manager.
   services.vaultwarden = {
     enable = true;
     backupDir = "/data/backup/vw";
@@ -18,18 +17,18 @@ in
     };
   };
 
-  # Initialize backup dir
+  # Initialize backup dir.
   systemd.tmpfiles.rules = [
     "d ${cfg.backupDir} 0755 ${user} ${config.users.groups.users.name} -"
   ];
 
-  # Change backup time to 03 AM
+  # Set backup time to 03:00 AM.
   systemd.timers.backup-vaultwarden.timerConfig.OnCalendar = "*-*-* 03:00:00";
 
-  # Add subdomain to base cert
+  # Add subdomain to base cert.
   security.acme.certs."moritz.lumme.de".extraDomainNames = [ dmn ];
 
-  # Configure reverse proxy
+  # Configure reverse proxy.
   services.nginx = {
     virtualHosts."${dmn}" = {
       useACMEHost = "moritz.lumme.de";

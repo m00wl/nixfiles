@@ -1,8 +1,6 @@
 { config, pkgs, ... }:
-
 {
   imports = [
-    #./src/gnome.nix
     ./src/vscode.nix
   ];
 
