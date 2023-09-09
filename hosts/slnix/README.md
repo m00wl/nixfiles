@@ -6,6 +6,8 @@ This document describes the additional bootstrap process for `slnix`.
 
 `slnix` follows the generic bootstrap process for Raspberry Pi systems that was described before.
 
+Note: It might be wise to upgrade the bootloader from time to time ([example](https://github.com/NixOS/nixpkgs/issues/162435)).
+
 ## `slnix` v0.2
 
 `slnix` is now a Raspberry Pi 3 Model B+ connected to an external hard drive for storage.
