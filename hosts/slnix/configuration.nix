@@ -11,6 +11,7 @@
       ../../modules/src/zeus.nix
       ../../modules/src/nginx.nix
       ../../modules/src/fail2ban.nix
+      ../../modules/src/gitea.nix
       ../../modules/src/vaultwarden.nix
       ../../modules/src/radicale.nix
     ];
