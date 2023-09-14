@@ -3,8 +3,8 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./disko-configuration.nix { _module.args.disks = [ "/dev/sda" ]; }
     ./home-configuration.nix
-    ../../modules/src/zfs.nix
   ];
 
   # Use systemd-boot EFI boot loader.

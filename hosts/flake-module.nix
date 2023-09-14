@@ -32,6 +32,7 @@ in
       vlnix = inputs.nixpkgs.lib.nixosSystem {
         modules = commonNixosModules ++ [
           ./vlnix/configuration.nix
+          inputs.disko.nixosModules.disko
           self.nixosModules.gui
         ];
       };
