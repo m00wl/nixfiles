@@ -3,7 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./disko-configuration.nix { _module.args.disks = [ "/dev/sda" ]; }
+    ./disko-configuration.nix
     ./home-configuration.nix
   ];
 
@@ -16,7 +16,6 @@
   # Configure networking.
   networking = {
     hostName = "vlnix";
-    hostId = "65809531";
     networkmanager.enable = true;
   };
 

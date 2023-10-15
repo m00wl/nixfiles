@@ -1,4 +1,7 @@
-{ disko, disks, ... }:
+{ disko, ... }:
+let
+  disks = [ "/dev/sda" ];
+in
 {
   disko.devices.disk.sda = {
     device = builtins.elemAt disks 0;
