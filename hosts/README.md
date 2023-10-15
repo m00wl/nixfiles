@@ -330,13 +330,13 @@ Set `root` password and reboot.
 Clone git repository:
 
 ```bash
-git clone git@github.com:m00wl/nixos-config.git ~/.nixos-config
+git clone git@github.com:m00wl/nixfiles.git ~/nixfiles
 ```
 
 Symlink `flake.nix`:
 
 ```bash
-ln -s ~/.nixos-config/flake.nix /etc/nixos/
+ln -s ~/nixfiles/flake.nix /etc/nixos/
 ```
 
 Make sure that `networking.hostname` aligns with a valid NixOS configuration in `flake.nix`.
@@ -345,7 +345,7 @@ For new hosts, create a folder with matching name and tweak `flake.nix` accordin
 If necessary, update `hardware-configuration.nix` of this host:
 
 ```bash
-cp /etc/nixos/hardware-configuration.nix ~/.nixos-config/hosts/$(hostname)/
+cp /etc/nixos/hardware-configuration.nix ~/nixfiles/hosts/$(hostname)/
 ```
 
 If necessary, update `.sops.yaml` to have access to exisiting secrets.
