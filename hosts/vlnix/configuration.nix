@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ./disko-configuration.nix
     ./home-configuration.nix
+    ../../modules/src/vbox-guest.nix
   ];
 
   # Use systemd-boot EFI boot loader.
