@@ -21,6 +21,9 @@
           \ |   exe "normal! g`\""
           \ | endif
 
+      " improve wildmode completion
+      set wildmode=longest:full
+
       " map <F2> to toggle line numbers
       nnoremap <F2> :set number! number?<CR>
       imap <F2> <C-O><F2>
