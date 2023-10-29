@@ -11,19 +11,25 @@ in
       partitions = {
         ESP = {
           type = "EF00";
-          size = "100M";
+          size = "512M";
           content = {
             type = "filesystem";
             format = "vfat";
             mountpoint = "/boot";
           };
         };
-        root = {
+        luks = {
           size = "100%";
           content = {
-            type = "filesystem";
-            format = "ext4";
-            mountpoint = "/";
+            type = "luks";
+            name = "crypted";
+            extraOpenArgs = [ "--allow-discards" ];
+            # don't set passwordFile here -> disko asks during installation.
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              mountpoint = "/";
+            };
           };
         };
       };

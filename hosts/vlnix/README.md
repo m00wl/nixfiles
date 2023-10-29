@@ -15,12 +15,6 @@ Install NixOS.
 nixos-install --flake github:m00wl/nixfiles#<HOSTNAME>
 ```
 
-Set user password.
-
-```bash
-passwd m00wl
-```
-
 Reboot machine.
 
 ```bash
