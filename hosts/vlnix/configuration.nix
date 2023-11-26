@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ./disko-configuration.nix
     ./home-configuration.nix
+    ./initrd.nix
     ../../modules/src/vbox-guest.nix
   ];
 
