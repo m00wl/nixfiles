@@ -3,23 +3,23 @@
   services.fail2ban = {
     enable = true;
     jails = {
-      nginx-auth = ''
-        enabled       = ${lib.boolToString config.services.nginx.enable}
-        port          = http,https
-        filter        = nginx-auth
-        maxretry      = 5
-        backend       = systemd
-        journalmatch  = _SYSTEMD_UNIT=nginx.service
-      '';
-      vaultwarden-auth = ''
-        enabled       = ${lib.boolToString config.services.vaultwarden.enable}
-        port          = http,https
-        filter        = vaultwarden-auth
-        maxretry      = 3
-        bantime       = 86400
-        backend       = systemd
-        journalmatch  = _SYSTEMD_UNIT=vaultwarden.service
-      '';
+      nginx-auth.settings = {
+        enabled = lib.boolToString config.services.nginx.enable;
+        port = "http,https";
+        filter = "nginx-auth";
+        maxretry = 5;
+        backend = "systemd";
+        journalmatch = "_SYSTEMD_UNIT=nginx.service";
+      };
+      vaultwarden-auth.settings = {
+        enabled = lib.boolToString config.services.vaultwarden.enable;
+        port = "http,https";
+        filter = "vaultwarden-auth";
+        maxretry = 3;
+        bantime = 86400;
+        backend = "systemd";
+        journalmatch = "_SYSTEMD_UNIT=vaultwarden.service";
+      };
     };
   };
   environment.etc = {
