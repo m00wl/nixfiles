@@ -34,7 +34,8 @@
 
       " map <F4> to toggle line markers
       highlight ColorColumn ctermbg=gray
-      let s:linemarkers = 0
+      set cc=81,101
+      let s:linemarkers = 1
       fun! ToggleLineMarkers()
         if s:linemarkers == 0
           let s:linemarkers = 1
