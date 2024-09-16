@@ -2,6 +2,6 @@
   # Enable X11 server.
   services.xserver = {
     enable = true;
-    layout = "de";
+    xkb.layout = "de";
   };
 }

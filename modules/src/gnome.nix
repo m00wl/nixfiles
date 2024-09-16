@@ -1,3 +1,5 @@
+{ pkgs, ... }:
+
 {
   # Import X11 server config.
   imports = [
@@ -5,9 +7,17 @@
   ];
 
   # Enable GDM + GNOME + touchpad support.
-  services.xserver = {
+  services = {
+    xserver = {
+      displayManager.gdm.enable = true;
+      desktopManager.gnome.enable = true;
+    };
     libinput.enable = true;
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
+  };
+
+  # Replace some default applications.
+  environment = {
+    gnome.excludePackages = (with pkgs; [ evince ]);
+    systemPackages = (with pkgs; [ papers ]);
   };
 }
