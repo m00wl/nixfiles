@@ -6,7 +6,6 @@
     ./disko-configuration.nix
     ./home-configuration.nix
     ./initrd.nix
-    ../../modules/src/vbox-guest.nix
   ];
 
   # Use systemd-boot EFI boot loader.
