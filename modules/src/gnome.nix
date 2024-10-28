@@ -14,10 +14,4 @@
     };
     libinput.enable = true;
   };
-
-  # Replace some default applications.
-  environment = {
-    gnome.excludePackages = (with pkgs; [ evince ]);
-    systemPackages = (with pkgs; [ papers ]);
-  };
 }
