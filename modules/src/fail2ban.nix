@@ -7,12 +7,13 @@
         enabled = lib.boolToString config.services.nginx.enable;
         port = "http,https";
         filter = "nginx-auth";
-        maxretry = 5;
+        maxretry = 25;
         backend = "systemd";
         journalmatch = "_SYSTEMD_UNIT=nginx.service";
       };
       vaultwarden-auth.settings = {
-        enabled = lib.boolToString config.services.vaultwarden.enable;
+        #enabled = lib.boolToString config.services.vaultwarden.enable;
+        enabled = false;
         port = "http,https";
         filter = "vaultwarden-auth";
         maxretry = 3;

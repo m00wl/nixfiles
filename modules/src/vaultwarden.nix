@@ -11,9 +11,11 @@ in
     enable = true;
     backupDir = "/data/backup/vw";
     config = {
-      domain = "https://" + dmn;
-      signupsAllowed = false;
-      websocketEnabled = true;
+      DOMAIN = "https://" + dmn;
+      SIGNUPS_ALLOWED = false;
+      WEBSOCKET_ENABLED = true;
+      LOGIN_RATELIMIT_SECONDS = 86400;
+      LOGIN_RATELIMIT_MAX_BURST = 25;
     };
   };
 
