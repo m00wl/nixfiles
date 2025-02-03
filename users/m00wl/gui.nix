@@ -2,6 +2,8 @@
 {
   home.packages = with pkgs; [
     firefox
+    thunderbird
     bitwarden
+    element-desktop
   ];
 }
