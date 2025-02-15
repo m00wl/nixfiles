@@ -2,9 +2,6 @@
   programs.ssh = {
     enable = true;
     forwardAgent = true;
-    includes = [
-      "/run/secrets/ssh/home"
-      "/run/secrets/ssh/git-server"
-    ];
+    includes = [ "/home/m00wl/.ssh/home.config" ];
   };
 }

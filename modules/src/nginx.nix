@@ -6,22 +6,13 @@
   options.services.nginx.virtualHosts = lib.mkOption {
     type = lib.types.attrsOf (lib.types.submodule {
       forceSSL = true;
-      basicAuthFile = "/run/secrets/nginx/htpasswd";
+      basicAuthFile = "/htpasswd";
     });
   };
 
   config = {
 
     networking.firewall.allowedTCPPorts = [ 80 443 ];
-
-    # Retrieve htpasswd from sops-nix.
-    sops.secrets."nginx/htpasswd" = {
-      sopsFile = ../../hosts/slnix/secrets.yaml;
-      key = "auth/htpasswd";
-      owner = config.services.nginx.user;
-      group = config.services.nginx.group;
-    };
-
 
     services.nginx = {
       enable = true;

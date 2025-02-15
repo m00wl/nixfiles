@@ -17,13 +17,6 @@ in
     groups.${cfg.group} = {};
   };
 
-  # Retrieve secrets from sops.
-  sops.secrets."gitea/dbpassword" = {
-    sopsFile = ../../hosts/slnix/secrets.yaml;
-    owner = cfg.user;
-    group = cfg.group;
-  };
-
   # Configure gitea service.
   services.gitea = {
     enable = true;
@@ -42,7 +35,7 @@ in
       };
       session.COOKIE_SECURE = true;
     };
-    database.passwordFile = "/run/secrets/gitea/dbpassword";
+    database.passwordFile = "/var/lib/gitea/dbpassword";
     dump = {
       enable = true;
       file = "gitea-dump";
