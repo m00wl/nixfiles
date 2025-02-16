@@ -28,9 +28,9 @@ in
       slnix = inputs.nixpkgs.lib.nixosSystem {
         modules = commonNixosModules ++ [ ./slnix/configuration.nix ];
       };
-      vlnix = inputs.nixpkgs.lib.nixosSystem {
+      doctor = inputs.nixpkgs.lib.nixosSystem {
         modules = commonNixosModules ++ [
-          ./vlnix/configuration.nix
+          ./doctor/configuration.nix
           inputs.disko.nixosModules.disko
           self.nixosModules.gui
         ];

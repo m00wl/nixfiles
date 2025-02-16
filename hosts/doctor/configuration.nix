@@ -2,10 +2,10 @@
 
 {
   imports = [
-    ./hardware-configuration.nix
-    ./disko-configuration.nix
-    ./home-configuration.nix
-    ./initrd.nix
+    ./hardware.nix
+    ./disk.nix
+    ./home.nix
+    #./initrd.nix
   ];
 
   # Use systemd-boot EFI boot loader.
@@ -16,7 +16,7 @@
 
   # Configure networking.
   networking = {
-    hostName = "vlnix";
+    hostName = "doctor";
     networkmanager.enable = true;
   };
 
