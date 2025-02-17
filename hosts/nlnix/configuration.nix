@@ -29,5 +29,8 @@
     wget
   ];
 
+  # enable touchpad support.
+  services.libinput.enable = true;
+
   system.stateVersion = "22.05";
 }
