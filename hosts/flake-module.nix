@@ -37,6 +37,9 @@ in
       };
       dax = inputs.nixpkgs.lib.nixosSystem {
         modules = commonNixosModules ++ [
+          inputs.nixos-hardware.nixosModules.common-pc
+          inputs.nixos-hardware.nixosModules.common-pc-ssd
+          inputs.nixos-hardware.nixosModules.common-cpu-intel
           ./dax/configuration.nix
           inputs.disko.nixosModules.disko
           self.nixosModules.gui
