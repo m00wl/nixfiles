@@ -35,6 +35,13 @@ in
           self.nixosModules.gui
         ];
       };
+      dax = inputs.nixpkgs.lib.nixosSystem {
+        modules = commonNixosModules ++ [
+          ./dax/configuration.nix
+          inputs.disko.nixosModules.disko
+          self.nixosModules.gui
+        ];
+      };
     };
 
   };

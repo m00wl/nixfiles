@@ -5,7 +5,7 @@ Format disks.
 ```bash
 nix --extra-experimental-features 'nix-command flakes' \
  run github:nix-community/disko --                     \
- --mode disko                                          \
+ --mode destroy,format,mount                           \
  --flake github:m00wl/nixfiles#<HOSTNAME>
 ```
 
