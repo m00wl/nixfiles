@@ -1,6 +1,9 @@
 { pkgs, ... }:
 {
-  virtualisation.libvirtd.enable = true;
+  imports = [
+    ./libvirtd.nix
+  ];
+
   programs.dconf.enable = true;
   home-manager.users.m00wl = {
     home.packages = with pkgs; [ virt-manager ];
@@ -11,5 +14,4 @@
       };
     };
   };
-  users.users.m00wl.extraGroups = [ "libvirtd" ];
 }
