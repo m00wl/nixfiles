@@ -28,6 +28,12 @@ in
       slnix = inputs.nixpkgs.lib.nixosSystem {
         modules = commonNixosModules ++ [ ./slnix/configuration.nix ];
       };
+      q = inputs.nixpkgs.lib.nixosSystem {
+        modules = commonNixosModules ++ [
+          ./q/configuration.nix
+          inputs.disko.nixosModules.disko
+        ];
+      };
       doctor = inputs.nixpkgs.lib.nixosSystem {
         modules = commonNixosModules ++ [
           ./doctor/configuration.nix
