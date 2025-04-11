@@ -24,6 +24,9 @@
       " improve wildmode completion
       set wildmode=longest:full
 
+      " highlight search
+      set hlsearch
+
       " map <F2> to toggle line numbers
       nnoremap <F2> :set number! number?<CR>
       imap <F2> <C-O><F2>
@@ -54,6 +57,9 @@
       " set listchars and map <F5> to toggle list mode
       nnoremap <F5> :set list! lcs=tab:>·,space:·,trail:!,precedes:<,extends:>,eol:$ list?<CR>
       imap <F5> <C-O><F5>
+
+      " map <F6> to search for word under cursor
+      map <F6> :gr! -srnw . -e '<cword>'<CR>
     '';
   };
 }
