@@ -1,6 +1,6 @@
 # `nixfiles`
 
-These files contain the configurations for my NixOS systems, as well as other UNIX-based systems running home-manager.
+These files contain the configurations for my NixOS systems, as well as other systems running home-manager.
 
 ## Structure
 
@@ -8,8 +8,8 @@ The repository has the following structure:
 
 ```bash
 .
-├── hosts       # host configurations (bootstrap, hardware, secrets, etc.).
-├── modules     # nixOS modules (mostly host-agnostic).
+├── hosts       # host configurations (bootstrap, hardware, etc.).
+├── modules     # common configuration snippets (mostly host-agnostic).
 ├── packages    # self-packaged software.
 ├── users       # user configurations (home configurations, home modules, etc.).
 ├── flake.nix   # nix flake.
@@ -21,7 +21,7 @@ The repository has the following structure:
 ## Dotfiles
 
 The `homeConfigurations` flake output exposes the common denominator of home configurations across my machines. 
-It is possible to reuse these user-specific application configurations (aka dotfiles) on other non-NixOS machines.
+It is possible to reuse these "dotfiles" on other non-NixOS machines running home-manager.
 
 1. [Install nix](https://nixos.org/download.html).
 
