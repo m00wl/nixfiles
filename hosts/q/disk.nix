@@ -4,7 +4,7 @@ let
 in
 {
   disko.devices = {
-    disk.sda = {
+    disk.main = {
       device = builtins.elemAt disks 0;
       type = "disk";
       content = {

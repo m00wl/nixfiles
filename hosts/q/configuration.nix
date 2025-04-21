@@ -5,6 +5,7 @@
     ./hardware.nix
     ./disk.nix
     ./home.nix
+    ./initrd.nix
     ../../modules/src/libvirtd.nix
   ];
 
