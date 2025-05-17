@@ -5,7 +5,6 @@
     ./hardware.nix
     ./disk.nix
     ./home.nix
-    #./initrd.nix
   ];
 
   # Use systemd-boot EFI boot loader.
