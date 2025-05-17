@@ -16,6 +16,9 @@ in
   flake = {
 
     nixosConfigurations = {
+      cochrane = inputs.nixpkgs.lib.nixosSystem {
+        modules = [ ./cochrane/configuration.nix ];
+      };
       blnix = inputs.nixpkgs.lib.nixosSystem {
         modules = commonNixosModules ++ [ ./blnix/configuration.nix ];
       };
