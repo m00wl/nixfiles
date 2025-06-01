@@ -37,6 +37,12 @@ in
           inputs.disko.nixosModules.disko
         ];
       };
+      troi = inputs.nixpkgs.lib.nixosSystem {
+        modules = commonNixosModules ++ [
+          ./troi/configuration.nix
+          inputs.disko.nixosModules.disko
+        ];
+      };
       doctor = inputs.nixpkgs.lib.nixosSystem {
         modules = commonNixosModules ++ [
           ./doctor/configuration.nix

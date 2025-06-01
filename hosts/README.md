@@ -62,7 +62,7 @@ ln -s /home/m00wl/nixfiles/flake.nix /etc/nixos/flake.nix
 
 ### Remote
 
-Install to a remote host that has low memory:
+Install to a remote host that has little memory:
 
 ```bash
 nix run github:nix-community/nixos-anywhere -- \
