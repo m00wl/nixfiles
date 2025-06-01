@@ -5,5 +5,7 @@
     thunderbird
     bitwarden
     element-desktop
+    zotero
+    libreoffice
   ];
 }

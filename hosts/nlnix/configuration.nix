@@ -20,6 +20,8 @@
     networkmanager.enable = true;
   };
 
+  services.tailscale.enable = true;
+
   # Set time zone.
   time.timeZone = "Europe/Amsterdam";
 
