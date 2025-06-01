@@ -5,7 +5,7 @@
     ./hardware.nix
     ./disk.nix
     ./home.nix
-    ./initrd.nix
+    #./initrd.nix
     ../../modules/src/libvirtd.nix
   ];
 
@@ -41,5 +41,10 @@
 
   hardware.ksm.enable = true;
 
-  system.stateVersion = "24.11";
+  # UEFI firmware support in libvirt.
+  systemd.tmpfiles.rules = [
+    "L+ /var/lib/qemu/firmware - - - - ${pkgs.qemu}/share/qemu/firmware"
+  ];
+
+  system.stateVersion = "25.05";
 }
