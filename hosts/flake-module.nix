@@ -24,6 +24,9 @@ in
       };
       nlnix = inputs.nixpkgs.lib.nixosSystem {
         modules = commonNixosModules ++ [
+          inputs.nixos-hardware.nixosModules.common-pc-laptop
+          inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
+          inputs.nixos-hardware.nixosModules.common-cpu-intel
           ./nlnix/configuration.nix
           self.nixosModules.gui
         ];

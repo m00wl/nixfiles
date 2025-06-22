@@ -2,8 +2,8 @@
 
 {
   imports = [
-    ./hardware-configuration.nix
-    ./home-configuration.nix
+    ./hardware.nix
+    ./home.nix
     ../../modules/src/zfs.nix
   ];
 
@@ -25,11 +25,10 @@
   # Set time zone.
   time.timeZone = "Europe/Amsterdam";
 
-  # List packages installed in system profile.
-  environment.systemPackages = with pkgs; [
-    vim
-    wget
-  ];
+  environment = {
+    systemPackages = builtins.attrValues { inherit (pkgs) vim wget; };
+    variables = { GSK_RENDERER = "ngl"; };
+  };
 
   # enable touchpad support.
   services.libinput.enable = true;
