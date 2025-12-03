@@ -63,7 +63,12 @@ in
           self.nixosModules.gui
         ];
       };
+      sisko = inputs.nixpkgs.lib.nixosSystem {
+        modules = commonNixosModules ++ [
+          ./sisko/configuration.nix
+          inputs.disko.nixosModules.disko
+        ];
+      };
     };
-
   };
 }
