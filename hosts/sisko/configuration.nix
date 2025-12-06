@@ -26,4 +26,17 @@
   environment.systemPackages = builtins.attrValues { inherit (pkgs) vim wget; };
 
   system.stateVersion = "25.05";
+
+  services.ddclient = {
+    enable = true;
+    server = "dyndns.strato.com/nic/update";
+    username = "lum.me";
+    passwordFile = "/root/ddclient/pass";
+    usev4 = "webv4, webv4=ipify-ipv4";
+    usev6 = "disabled";
+    domains = [ "hq.lum.me" ];
+    interval = "10min";
+  };
+
+  services.fail2ban.enable = true;
 }
