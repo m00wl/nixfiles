@@ -15,7 +15,7 @@
 
   # Configure networking.
   networking = {
-    hostName = "sisko";
+    hostName = "laforge";
     networkmanager.enable = true;
   };
 
@@ -27,18 +27,18 @@
 
   system.stateVersion = "25.05";
 
-  services = {
-    thermald.enable = true;
-    fail2ban.enable = true;
-    ddclient = {
-      enable = true;
-      server = "dyndns.strato.com/nic/update";
-      username = "lum.me";
-      passwordFile = "/root/ddclient/pass";
-      usev4 = "webv4, webv4=ipify-ipv4";
-      usev6 = "disabled";
-      domains = [ "hq.lum.me" ];
-      interval = "10min";
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
+  services.nginx = {
+    enable = true;
+    recommendedOptimisation = true;
+    recommendedGzipSettings = true;
+    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
+
+    virtualHosts."moritz.lum.me" = {
+        root = "/srv/http/moritz.lum.me";
+        #forceSSL = true;
+        #enableACME = true;
     };
   };
 }

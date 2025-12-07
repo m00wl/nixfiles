@@ -16,12 +16,6 @@ in
   flake = {
 
     nixosConfigurations = {
-      cochrane = inputs.nixpkgs.lib.nixosSystem {
-        modules = [ ./cochrane/configuration.nix ];
-      };
-      blnix = inputs.nixpkgs.lib.nixosSystem {
-        modules = commonNixosModules ++ [ ./blnix/configuration.nix ];
-      };
       nlnix = inputs.nixpkgs.lib.nixosSystem {
         modules = commonNixosModules ++ [
           inputs.nixos-hardware.nixosModules.common-pc-laptop
@@ -31,12 +25,43 @@ in
           self.nixosModules.gui
         ];
       };
+      doctor = inputs.nixpkgs.lib.nixosSystem {
+        modules = commonNixosModules ++ [
+          ./doctor/configuration.nix
+          inputs.disko.nixosModules.disko
+          self.nixosModules.gui
+        ];
+      };
+      blnix = inputs.nixpkgs.lib.nixosSystem {
+        modules = commonNixosModules ++ [ ./blnix/configuration.nix ];
+      };
       slnix = inputs.nixpkgs.lib.nixosSystem {
         modules = commonNixosModules ++ [ ./slnix/configuration.nix ];
       };
+      sisko = inputs.nixpkgs.lib.nixosSystem {
+        modules = commonNixosModules ++ [
+          inputs.nixos-hardware.nixosModules.common-pc
+          inputs.nixos-hardware.nixosModules.common-pc-ssd
+          inputs.nixos-hardware.nixosModules.common-cpu-intel
+          ./sisko/configuration.nix
+          inputs.disko.nixosModules.disko
+        ];
+      };
+      cochrane = inputs.nixpkgs.lib.nixosSystem {
+        modules = [ ./cochrane/configuration.nix ];
+      };
       q = inputs.nixpkgs.lib.nixosSystem {
         modules = commonNixosModules ++ [
+          inputs.nixos-hardware.nixosModules.common-pc
+          inputs.nixos-hardware.nixosModules.common-pc-ssd
+          inputs.nixos-hardware.nixosModules.common-cpu-intel
           ./q/configuration.nix
+          inputs.disko.nixosModules.disko
+        ];
+      };
+      laforge = inputs.nixpkgs.lib.nixosSystem {
+        modules = commonNixosModules ++ [
+          ./laforge/configuration.nix
           inputs.disko.nixosModules.disko
         ];
       };
@@ -44,13 +69,6 @@ in
         modules = commonNixosModules ++ [
           ./troi/configuration.nix
           inputs.disko.nixosModules.disko
-        ];
-      };
-      doctor = inputs.nixpkgs.lib.nixosSystem {
-        modules = commonNixosModules ++ [
-          ./doctor/configuration.nix
-          inputs.disko.nixosModules.disko
-          self.nixosModules.gui
         ];
       };
       dax = inputs.nixpkgs.lib.nixosSystem {
@@ -61,12 +79,6 @@ in
           ./dax/configuration.nix
           inputs.disko.nixosModules.disko
           self.nixosModules.gui
-        ];
-      };
-      sisko = inputs.nixpkgs.lib.nixosSystem {
-        modules = commonNixosModules ++ [
-          ./sisko/configuration.nix
-          inputs.disko.nixosModules.disko
         ];
       };
     };
