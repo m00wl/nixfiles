@@ -1,6 +1,6 @@
 { disko, ... }:
 let
-  disks = [ "/dev/sda" ];
+  disks = [ "/dev/vda" ];
 in
 {
   disko.devices = {
