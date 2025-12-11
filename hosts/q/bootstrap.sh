@@ -33,11 +33,12 @@ if [ ! -f "$NIXOS_ISO" ]; then
 fi
 
 virt-install \
-  --name "troi" \
+  --name "laforge" \
   --vcpus 1 \
   --ram 2048 \
+  --autostart \
   --boot uefi \
-  --disk format=qcow2,size=8 \
+  --disk format=qcow2,size=16 \
   --console pty,target_type=virtio \
   --autoconsole none \
   --graphics none \

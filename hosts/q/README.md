@@ -18,7 +18,7 @@ After NixOS installation, build the custom installer image and bootstrap VMs.
 
 ```bash
 nix build .#nixosConfigurations.cochrane.config.system.build.isoImage
-./bootstrap -n ./result/iso/installer.iso
+./bootstrap.sh -n ./result/iso/<INSTALLER.ISO>
 ```
 
 Install VMs (virsh console, ssh, nixos-anywhere, etc.).

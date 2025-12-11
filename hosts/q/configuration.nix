@@ -5,7 +5,7 @@
     ./hardware.nix
     ./disk.nix
     ./home.nix
-    #./initrd.nix
+    ./initrd.nix
     ../../modules/src/libvirtd.nix
   ];
 
@@ -19,13 +19,13 @@
   networking = {
     hostName = "q";
     networkmanager.enable = true;
-    bridges.br0.interfaces = [ "enp0s3" ];
+    bridges.br0.interfaces = [ "eno1" ];
     interfaces = {
       br0 = {
         virtual = true;
         useDHCP = true;
       };
-      enp0s3.useDHCP = true;
+      eno1.useDHCP = true;
     };
   };
 
@@ -33,11 +33,14 @@
   time.timeZone = "Europe/Amsterdam";
 
   # List packages installed in system profile.
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = builtins.attrValues {
+    inherit (pkgs)
     vim
     wget
-    virt-manager
-  ];
+    virt-manager;
+  };
+
+  system.stateVersion = "25.05";
 
   hardware.ksm.enable = true;
 
@@ -45,8 +48,6 @@
   systemd.tmpfiles.rules = [
     "L+ /var/lib/qemu/firmware - - - - ${pkgs.qemu}/share/qemu/firmware"
   ];
-
-  system.stateVersion = "25.05";
 
   services.thermald.enable = true;
 }

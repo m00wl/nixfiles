@@ -24,8 +24,8 @@ Format disks.
 
 ```bash
 nix --extra-experimental-features 'nix-command flakes' \
- run github:nix-community/disko --                     \
- --mode destroy,format,mount                           \
+ run nixpkgs#disko -- \
+ --mode destroy,format,mount \
  --flake github:m00wl/nixfiles#<HOSTNAME>
 ```
 
@@ -66,7 +66,7 @@ Install to a remote host that has little memory:
 
 ```bash
 nix run github:nix-community/nixos-anywhere -- \
- --no-disko-deps                               \
- --flake github:m00wl/nixfiles#<HOSTNAME>      \
+ --no-disko-deps \
+ --flake github:m00wl/nixfiles#<HOSTNAME> \
  --target-host root@<IP-ADDRESS>
 ```

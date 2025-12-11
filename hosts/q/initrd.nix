@@ -3,6 +3,7 @@
 {
   boot = {
     initrd = {
+      availableKernelModules = [ "e1000e" ];
       network = {
         enable = true;
         ssh = {
@@ -13,8 +14,7 @@
           hostKeys = [ "/etc/secrets/initrd/ssh_host_ed25519_key" ];
         };
       };
-      availableKernelModules = [ "e1000" ];
     };
-    kernelParams = [ "ip=dhcp" ];
+    kernelParams = [ "ip=::::${config.networking.hostName}::dhcp" ];
   };
 }
