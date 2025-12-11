@@ -8,9 +8,15 @@
   ];
 
   # Use systemd-boot EFI boot loader.
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
+  boot = {
+    kernelParams = [
+      "vga=0x317"
+      "nomodeset"
+    ];
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+      };
   };
 
   # Configure networking.
