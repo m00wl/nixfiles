@@ -16,7 +16,22 @@
   # Configure networking.
   networking = {
     hostName = "sisko";
-    networkmanager.enable = true;
+    interfaces.eno1 = {
+      ipv4.addresses = [
+        {
+          address = "192.168.0.2";
+          prefixLength = 24;
+        }
+      ];
+    };
+    defaultGateway = {
+      address = "192.168.0.1";
+      interface = "eno1";
+    };
+    nameservers = [ "192.168.0.1" ];
+
+    firewall.allowedTCPPorts = [ 53 ];
+    firewall.allowedUDPPorts = [ 53 67 ];
   };
 
   # Set time zone.
@@ -39,6 +54,19 @@
       usev6 = "disabled";
       domains = [ "hq.lum.me" ];
       interval = "10min";
+    };
+    dnsmasq = {
+      enable = true;
+      settings = {
+        dhcp-range = [ "192.168.0.100,192.168.0.200,8d" ];
+        dhcp-option= [ "option:router,192.168.0.1" ];
+        expand-hosts = true;
+        domain = "home.lum.me";
+        no-hosts = true;
+        domain-needed = true;
+        local = [ "/home.lum.me/" ];
+        address = [ "/sisko.home.lum.me/192.168.0.2" ];
+      };
     };
   };
 }
