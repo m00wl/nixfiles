@@ -42,11 +42,17 @@
       recommendedTlsSettings = true;
 
       virtualHosts."moritz.lum.me" = {
-          root = "/srv/http/moritz.lum.me";
-          #forceSSL = true;
-          #enableACME = true;
+          root = "/srv/www/moritz.lum.me";
+          forceSSL = true;
+          enableACME = true;
       };
     };
+  };
+
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "no-reply@lum.me";
+    certs."moritz.lum.me" = {};
   };
 
   system.stateVersion = "25.05";
