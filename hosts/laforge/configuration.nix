@@ -41,10 +41,20 @@
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
 
-      virtualHosts."moritz.lum.me" = {
-          root = "/srv/www/moritz.lum.me";
-          forceSSL = true;
+      virtualHosts = {
+        "moritz.lum.me" = {
           enableACME = true;
+          forceSSL = true;
+          root = "/srv/www/moritz.lum.me";
+        };
+        "vw.lum.me" = {
+          useACMEHost = "moritz.lum.me";
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://troi:8000";
+            proxyWebsockets = true;
+          };
+        };
       };
     };
   };
@@ -52,7 +62,9 @@
   security.acme = {
     acceptTerms = true;
     defaults.email = "no-reply@lum.me";
-    certs."moritz.lum.me" = {};
+    certs."moritz.lum.me" = {
+      extraDomainNames = [ "vw.lum.me" ];
+    };
   };
 
   system.stateVersion = "25.05";
