@@ -23,6 +23,7 @@
   networking = {
     hostName = "laforge";
     networkmanager.enable = true;
+    firewall.allowedTCPPorts = [ 80 443 ];
   };
 
   # Set time zone.
@@ -31,20 +32,22 @@
   # List packages installed in system profile.
   environment.systemPackages = builtins.attrValues { inherit (pkgs) vim wget; };
 
-  system.stateVersion = "25.05";
+  services = {
+    qemuGuest.enable = true;
+    nginx = {
+      enable = true;
+      recommendedOptimisation = true;
+      recommendedGzipSettings = true;
+      recommendedProxySettings = true;
+      recommendedTlsSettings = true;
 
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
-  services.nginx = {
-    enable = true;
-    recommendedOptimisation = true;
-    recommendedGzipSettings = true;
-    recommendedProxySettings = true;
-    recommendedTlsSettings = true;
-
-    virtualHosts."moritz.lum.me" = {
-        root = "/srv/http/moritz.lum.me";
-        #forceSSL = true;
-        #enableACME = true;
+      virtualHosts."moritz.lum.me" = {
+          root = "/srv/http/moritz.lum.me";
+          #forceSSL = true;
+          #enableACME = true;
+      };
     };
   };
+
+  system.stateVersion = "25.05";
 }

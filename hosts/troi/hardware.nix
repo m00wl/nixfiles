@@ -2,7 +2,7 @@
 
 {
   imports = [
-    (modulesPath + "/profiles/headless.nix")
+    (modulesPath + "/profiles/minimal.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
   ];
 

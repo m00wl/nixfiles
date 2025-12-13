@@ -28,7 +28,6 @@
   };
 
   services.qemuGuest.enable = true;
-  boot.kernelParams = [ "console=ttyS0,115200" ];
 
   system.stateVersion = "25.05";
 }

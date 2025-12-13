@@ -42,12 +42,17 @@
 
   system.stateVersion = "25.05";
 
-  hardware.ksm.enable = true;
+  virtualisation.libvirtd = {
+    allowedBridges = [ "br0" ];
+    onShutdown = "shutdown";
+  };
 
   # UEFI firmware support in libvirt.
   systemd.tmpfiles.rules = [
     "L+ /var/lib/qemu/firmware - - - - ${pkgs.qemu}/share/qemu/firmware"
   ];
+
+  hardware.ksm.enable = true;
 
   services.thermald.enable = true;
 }
