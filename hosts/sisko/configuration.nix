@@ -59,7 +59,8 @@
       enable = true;
       settings = {
         dhcp-range = [ "192.168.0.100,192.168.0.200,8d" ];
-        dhcp-option= [ "option:router,192.168.0.1" ];
+        dhcp-option = [ "option:router,192.168.0.1" ];
+        dhcp-hostsfile = "/etc/dnsmasq-dhcp-host";
         expand-hosts = true;
         domain = "home.lum.me";
         no-hosts = true;
