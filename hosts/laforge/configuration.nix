@@ -40,7 +40,6 @@
       recommendedGzipSettings = true;
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
-
       virtualHosts = {
         "moritz.lum.me" = {
           enableACME = true;
@@ -51,7 +50,7 @@
           useACMEHost = "moritz.lum.me";
           forceSSL = true;
           locations."/" = {
-            proxyPass = "http://troi:8000";
+            proxyPass = "http://troi";
             proxyWebsockets = true;
           };
         };

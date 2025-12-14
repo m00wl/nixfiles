@@ -23,7 +23,7 @@
   networking = {
     hostName = "troi";
     networkmanager.enable = true;
-    firewall.allowedTCPPorts = [ 8000 ];
+    firewall.allowedTCPPorts = [ 80 ];
   };
 
   # Set time zone.
@@ -37,12 +37,26 @@
     vaultwarden = {
       enable = true;
       backupDir = "/var/backup/vaultwarden";
-      environmentFile = "/var/lib/vaultwarden/vaultwarden.env";
+      environmentFile = "/etc/vaultwarden.env";
       config = {
         DOMAIN = "https://vw.lum.me";
         SIGNUPS_ALLOWED = false;
-        #ROCKET_ADDRESS = "::1";
-        #ROCKET_PORT = 8000;
+        _ENABLE_SMTP = false;
+      };
+    };
+    nginx = {
+      enable = true;
+      recommendedGzipSettings = true;
+      recommendedOptimisation = true;
+      recommendedProxySettings = true;
+      recommendedTlsSettings = true;
+      virtualHosts = {
+        "vw.lum.me" = {
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:8000";
+            proxyWebsockets = true;
+          };
+        };
       };
     };
   };
