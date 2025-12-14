@@ -37,6 +37,7 @@
     nextcloud = {
       enable = true;
       hostName = "nc.lum.me";
+      https = true;
       package = pkgs.nextcloud31;
       config = {
         dbtype = "sqlite";

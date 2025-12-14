@@ -54,6 +54,13 @@
             proxyWebsockets = true;
           };
         };
+        "nc.lum.me" = {
+          useACMEHost = "moritz.lum.me";
+          forceSSL = true;
+          locations."/" = {
+            proxyPass = "http://data";
+          };
+        };
       };
     };
   };
@@ -62,7 +69,7 @@
     acceptTerms = true;
     defaults.email = "no-reply@lum.me";
     certs."moritz.lum.me" = {
-      extraDomainNames = [ "vw.lum.me" ];
+      extraDomainNames = [ "vw.lum.me" "nc.lum.me" ];
     };
   };
 
