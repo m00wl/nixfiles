@@ -71,6 +71,12 @@ in
           inputs.disko.nixosModules.disko
         ];
       };
+      data = inputs.nixpkgs.lib.nixosSystem {
+        modules = commonNixosModules ++ [
+          ./data/configuration.nix
+          inputs.disko.nixosModules.disko
+        ];
+      };
       dax = inputs.nixpkgs.lib.nixosSystem {
         modules = commonNixosModules ++ [
           inputs.nixos-hardware.nixosModules.common-pc

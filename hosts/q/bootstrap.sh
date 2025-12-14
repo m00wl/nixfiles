@@ -45,3 +45,32 @@ virt-install \
   --network bridge=br0,model=virtio \
   --osinfo nixos-unknown \
   --cdrom "$NIXOS_ISO"
+
+virt-install \
+  --name "troi" \
+  --vcpus 1 \
+  --ram 2048 \
+  --autostart \
+  --boot uefi \
+  --disk format=qcow2,size=16 \
+  --console pty,target_type=virtio \
+  --autoconsole none \
+  --graphics none \
+  --network bridge=br0,model=virtio \
+  --osinfo nixos-unknown \
+  --cdrom "$NIXOS_ISO"
+
+virt-install \
+  --name "data" \
+  --vcpus 1 \
+  --ram 2048 \
+  --autostart \
+  --boot uefi \
+  --disk format=qcow2,size=256 \
+  --console pty,target_type=virtio \
+  --autoconsole none \
+  --graphics none \
+  --network bridge=br0,model=virtio \
+  --osinfo nixos-unknown \
+  --cdrom "$NIXOS_ISO"
+
