@@ -50,6 +50,12 @@ in
       cochrane = inputs.nixpkgs.lib.nixosSystem {
         modules = [ ./cochrane/configuration.nix ];
       };
+      queen = inputs.nixpkgs.lib.nixosSystem {
+        modules = commonNixosModules ++ [
+          ./queen/configuration.nix
+          inputs.disko.nixosModules.disko
+        ];
+      };
       q = inputs.nixpkgs.lib.nixosSystem {
         modules = commonNixosModules ++ [
           inputs.nixos-hardware.nixosModules.common-pc
