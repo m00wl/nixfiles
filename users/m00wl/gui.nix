@@ -2,8 +2,7 @@
 {
   home.packages = with pkgs; [
     firefox
-    thunderbird
-    bitwarden
+    bitwarden-desktop
     element-desktop
     zotero
     libreoffice

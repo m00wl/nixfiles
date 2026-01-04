@@ -25,10 +25,7 @@
   # Set time zone.
   time.timeZone = "Europe/Amsterdam";
 
-  environment = {
-    systemPackages = builtins.attrValues { inherit (pkgs) vim wget; };
-    variables = { GSK_RENDERER = "ngl"; };
-  };
+  environment.systemPackages = builtins.attrValues { inherit (pkgs) vim wget; };
 
   # enable touchpad support.
   services.libinput.enable = true;

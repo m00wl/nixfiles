@@ -1,9 +1,11 @@
 {
   programs.git = {
     enable = true;
-    userName = "Moritz Lumme";
-    userEmail = "46034439+m00wl@users.noreply.github.com";
-    extraConfig = {
+    settings = {
+      user = {
+        name = "Moritz Lumme";
+        email = "46034439+m00wl@users.noreply.github.com";
+      };
       core = {
         editor = "vim";
       };

@@ -32,9 +32,6 @@ in
           self.nixosModules.gui
         ];
       };
-      blnix = inputs.nixpkgs.lib.nixosSystem {
-        modules = commonNixosModules ++ [ ./blnix/configuration.nix ];
-      };
       slnix = inputs.nixpkgs.lib.nixosSystem {
         modules = commonNixosModules ++ [ ./slnix/configuration.nix ];
       };

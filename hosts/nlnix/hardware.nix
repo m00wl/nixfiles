@@ -16,11 +16,13 @@
   fileSystems."/" =
     { device = "rpool/nixos/root";
       fsType = "zfs";
+      options = [ "zfsutil" "X-mount.mkdir" ];
     };
 
   fileSystems."/nix" =
     { device = "rpool/nixos/nix";
       fsType = "zfs";
+      options = [ "zfsutil" "X-mount.mkdir" ];
     };
 
   fileSystems."/home" =
