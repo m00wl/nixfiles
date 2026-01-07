@@ -17,7 +17,10 @@
   networking = {
     hostName = "nlnix";
     hostId = "737e8eaa";
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+      plugins = [ pkgs.networkmanager-openconnect ];
+    };
   };
 
   services.tailscale.enable = true;
