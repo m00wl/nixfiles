@@ -31,5 +31,10 @@
   # enable touchpad support.
   services.libinput.enable = true;
 
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+  };
+
   system.stateVersion = "22.05";
 }
