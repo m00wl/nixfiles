@@ -40,9 +40,8 @@
   # List packages installed in system profile.
   environment.systemPackages = builtins.attrValues { inherit (pkgs) vim wget; };
 
-  system.stateVersion = "25.05";
-
   powerManagement.powertop.enable = true;
+
   services = {
     fail2ban.enable = true;
     ddclient = {
@@ -69,5 +68,14 @@
         address = [ "/sisko.home.lum.me/192.168.0.2" ];
       };
     };
+  };
+
+  system = {
+    autoUpgrade = {
+      enable = true;
+      dates = "Tue 05:00";
+      flake = "github:m00wl/nixfiles";
+    };
+    stateVersion = "25.05";
   };
 }

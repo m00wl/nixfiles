@@ -51,5 +51,12 @@
     };
   };
 
-  system.stateVersion = "25.05";
+  system = {
+    autoUpgrade = {
+      enable = true;
+      dates = "Tue 05:00";
+      flake = "github:m00wl/nixfiles";
+    };
+    stateVersion = "25.05";
+  };
 }
