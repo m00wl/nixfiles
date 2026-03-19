@@ -14,7 +14,6 @@
       ../../modules/src/gitea.nix
       ../../modules/src/vaultwarden.nix
       ../../modules/src/radicale.nix
-      ../../modules/src/charl00w.nix
     ];
 
   boot.loader = {
