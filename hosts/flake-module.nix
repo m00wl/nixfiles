@@ -47,6 +47,16 @@ in
       cochrane = inputs.nixpkgs.lib.nixosSystem {
         modules = [ ./cochrane/configuration.nix ];
       };
+      seven = inputs.nixpkgs.lib.nixosSystem {
+        modules = commonNixosModules ++ [
+          inputs.nixos-hardware.nixosModules.common-pc
+          inputs.nixos-hardware.nixosModules.common-pc-ssd
+          inputs.nixos-hardware.nixosModules.common-cpu-intel
+          #inputs.nixos-hardware.nixosModules.intel-nuc-7i3bnb
+          ./seven/configuration.nix
+          inputs.disko.nixosModules.disko
+        ];
+      };
       queen = inputs.nixpkgs.lib.nixosSystem {
         modules = commonNixosModules ++ [
           ./queen/configuration.nix
