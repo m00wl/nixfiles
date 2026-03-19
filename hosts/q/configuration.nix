@@ -54,5 +54,5 @@
 
   hardware.ksm.enable = true;
 
-  services.thermald.enable = true;
+  powerManagement.powertop.enable = true;
 }

@@ -42,8 +42,8 @@
 
   system.stateVersion = "25.05";
 
+  powerManagement.powertop.enable = true;
   services = {
-    thermald.enable = true;
     fail2ban.enable = true;
     ddclient = {
       enable = true;
