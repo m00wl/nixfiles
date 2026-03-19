@@ -30,11 +30,7 @@
   time.timeZone = "Europe/Amsterdam";
 
   # List packages installed in system profile.
-  environment.systemPackages = builtins.attrValues {
-    inherit (pkgs)
-    vim
-    wget;
-  };
+  environment.systemPackages = builtins.attrValues { inherit (pkgs) vim wget; };
 
   services = {
     qemuGuest.enable = true;
@@ -42,7 +38,7 @@
       enable = true;
       hostName = "nc.lum.me";
       https = true;
-      package = pkgs.nextcloud31;
+      package = pkgs.nextcloud32;
       config = {
         dbtype = "sqlite";
         adminpassFile = "/etc/nextcloud-admin-pass";
