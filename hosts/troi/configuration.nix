@@ -59,6 +59,24 @@
         };
       };
     };
+    borgbackup.jobs = {
+      vaultwarden = {
+        paths = config.services.vaultwarden.backupDir;
+        environment.BORG_RSH = "ssh -i /root/borgbackup/id_ed25519_borg_troi";
+        repo = "borg@seven:.";
+        encryption = {
+          mode = "repokey";
+          passCommand = "cat /root/borgbackup/repopass";
+        };
+        compression = "auto,lzma";
+        prune.keep = {
+          daily = 7;
+          weekly = 4;
+          monthly = 12;
+          yearly = -1;
+        };
+      };
+    };
   };
 
   nix.gc.options = "--delete-older-than 8w";
