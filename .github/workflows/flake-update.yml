@@ -10,7 +10,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  update-flake-lock:
+  update:
     runs-on: ubuntu-latest
     timeout-minutes: 10 
 
