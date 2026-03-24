@@ -70,7 +70,7 @@
     };
   };
 
-  nix.gc.options = "--delete-older-than 8w";
+  nix.gc.options = "--delete-older-than 56d";
 
   system = {
     autoUpgrade = {
