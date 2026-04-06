@@ -21,13 +21,13 @@ in
             };
           };
           swap = {
-              size = "8G";
-              content = {
-                type = "swap";
-                randomEncryption = true;
-                discardPolicy = "both";
-              };
+            size = "8G";
+            content = {
+              type = "swap";
+              randomEncryption = true;
+              discardPolicy = "both";
             };
+          };
           luks = {
             size = "100%";
             content = {

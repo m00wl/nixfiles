@@ -11,16 +11,16 @@ in
         type = "gpt";
         partitions = {
           boot = {
-              size = "1M";
-              type = "EF02";
-              #attributes = [ 0 ];
+            size = "1M";
+            type = "EF02";
+            #attributes = [ 0 ];
           };
           swap = {
-              size = "2G";
-              content = {
-                type = "swap";
-                discardPolicy = "both";
-              };
+            size = "2G";
+            content = {
+              type = "swap";
+              discardPolicy = "both";
+            };
           };
           root = {
             size = "100%";

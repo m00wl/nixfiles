@@ -31,7 +31,10 @@
     nameservers = [ "192.168.0.1" ];
 
     firewall.allowedTCPPorts = [ 53 ];
-    firewall.allowedUDPPorts = [ 53 67 ];
+    firewall.allowedUDPPorts = [
+      53
+      67
+    ];
   };
 
   # Set time zone.

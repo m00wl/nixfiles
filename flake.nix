@@ -14,7 +14,8 @@
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
   };
 
-  outputs = inputs@{ flake-parts, ... }:
+  outputs =
+    inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         ./hosts/flake-module.nix
@@ -24,8 +25,17 @@
       systems = [
         "x86_64-linux"
       ];
-      perSystem = { config, self', inputs', pkgs, system, ... }: {
-        formatter = pkgs.nixfmt;
-      };
+      perSystem =
+        {
+          config,
+          self',
+          inputs',
+          pkgs,
+          system,
+          ...
+        }:
+        {
+          formatter = pkgs.nixfmt;
+        };
     };
 }

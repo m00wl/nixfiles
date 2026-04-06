@@ -16,14 +16,17 @@
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
-      };
+    };
   };
 
   # Configure networking.
   networking = {
     hostName = "laforge";
     networkmanager.enable = true;
-    firewall.allowedTCPPorts = [ 80 443 ];
+    firewall.allowedTCPPorts = [
+      80
+      443
+    ];
   };
 
   # Set time zone.
@@ -87,7 +90,10 @@
     acceptTerms = true;
     defaults.email = "no-reply@lum.me";
     certs."moritz.lum.me" = {
-      extraDomainNames = [ "vw.lum.me" "nc.lum.me" ];
+      extraDomainNames = [
+        "vw.lum.me"
+        "nc.lum.me"
+      ];
     };
   };
 

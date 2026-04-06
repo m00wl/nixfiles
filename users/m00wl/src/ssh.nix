@@ -1,6 +1,8 @@
 {
   programs.ssh = {
     enable = true;
-    matchBlocks."*" = { forwardAgent = true; };
+    matchBlocks."*" = {
+      forwardAgent = true;
+    };
   };
 }

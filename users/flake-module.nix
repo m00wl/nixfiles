@@ -2,12 +2,20 @@
 {
   flake = {
 
-    homeModules = { 
+    homeModules = {
       default = self.homeModules.cli;
-      m00wl = { imports = [ ./m00wl/base.nix ]; };
-      zeus = { imports = [ ./zeus/base.nix ]; };
-      cli = { imports = [ ./m00wl/cli.nix ]; };
-      gui = { imports = [ ./m00wl/gui.nix ]; };
+      m00wl = {
+        imports = [ ./m00wl/base.nix ];
+      };
+      zeus = {
+        imports = [ ./zeus/base.nix ];
+      };
+      cli = {
+        imports = [ ./m00wl/cli.nix ];
+      };
+      gui = {
+        imports = [ ./m00wl/gui.nix ];
+      };
     };
 
     homeConfigurations = {

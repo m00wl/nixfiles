@@ -30,11 +30,15 @@
   services.borgbackup.repos = {
     data = {
       path = "/var/lib/borgbackup/data";
-      authorizedKeys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPIUf4gvsMDgo6nsoS2AnT+X+ZYnLC92pGbe/x0ZvTMQ borg@data" ];
+      authorizedKeys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPIUf4gvsMDgo6nsoS2AnT+X+ZYnLC92pGbe/x0ZvTMQ borg@data"
+      ];
     };
     troi = {
       path = "/var/lib/borgbackup/troi";
-      authorizedKeys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGOsM0SFfJ8yV93x9PoHLAckp4e9uhYb4HRgz8ZyMsV5 borg@troi" ];
+      authorizedKeys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGOsM0SFfJ8yV93x9PoHLAckp4e9uhYb4HRgz8ZyMsV5 borg@troi"
+      ];
     };
   };
 

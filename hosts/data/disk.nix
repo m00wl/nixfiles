@@ -21,11 +21,11 @@ in
             };
           };
           swap = {
-              size = "2G";
-              content = {
-                type = "swap";
-                discardPolicy = "both";
-              };
+            size = "2G";
+            content = {
+              type = "swap";
+              discardPolicy = "both";
+            };
           };
           root = {
             size = "100%";

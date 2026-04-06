@@ -16,7 +16,7 @@
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
-      };
+    };
   };
 
   # Configure networking.
@@ -45,8 +45,9 @@
       };
       extraApps = {
         inherit (config.services.nextcloud.package.packages.apps)
-        contacts
-        calendar;
+          contacts
+          calendar
+          ;
       };
     };
     borgbackup.jobs = {

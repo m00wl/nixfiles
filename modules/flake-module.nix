@@ -2,7 +2,11 @@
 {
   flake.nixosModules = {
     default = self.nixosModules.base;
-    base = { imports = [ ./base.nix ]; };
-    gui = { imports = [ ./gui.nix ]; };
+    base = {
+      imports = [ ./base.nix ];
+    };
+    gui = {
+      imports = [ ./gui.nix ];
+    };
   };
 }

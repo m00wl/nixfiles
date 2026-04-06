@@ -35,9 +35,10 @@
   # List packages installed in system profile.
   environment.systemPackages = builtins.attrValues {
     inherit (pkgs)
-    vim
-    wget
-    virt-manager;
+      vim
+      wget
+      virt-manager
+      ;
   };
 
   system.stateVersion = "25.05";

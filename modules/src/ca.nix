@@ -26,7 +26,9 @@ in
       crt = "${creds}/intermediate_cert";
       key = "${creds}/intermediate_key";
       dnsNames = [ "ca.lum.home" ];
-      logger = { format = "text"; };
+      logger = {
+        format = "text";
+      };
       db = {
         type = "badgerv2";
         dataSource = "/var/lib/step-ca/db";
