@@ -19,12 +19,10 @@
       imports = [
         ./hosts/flake-module.nix
         ./modules/flake-module.nix
-        ./packages/flake-module.nix
         ./users/flake-module.nix
       ];
       systems = [
         "x86_64-linux"
-        "aarch64-linux"
       ];
       perSystem = { config, self', inputs', pkgs, system, ... }: {
         formatter = pkgs.nixfmt;

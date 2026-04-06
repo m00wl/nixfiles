@@ -1,4 +1,4 @@
-{ self, inputs, config, ... }:
+{ self, inputs, ... }:
 {
   flake = {
 
@@ -14,11 +14,11 @@
       default = self.homeConfigurations.cli;
       cli = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = inputs.nixpkgs.legacyPackages."x86_64-linux";
-        modules = with self.homeModules; [ m00wl cli ];
+        modules = builtins.attrValues { inherit (self.homeModules) m00wl cli; };
       };
       full = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = inputs.nixpkgs.legacyPackages."x86_64-linux";
-        modules = with self.homeModules; [ m00wl cli gui ];
+        modules = builtins.attrValues { inherit (self.homeModules) m00wl cli gui; };
       };
     };
 

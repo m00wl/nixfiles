@@ -1,6 +1,4 @@
-{ config, ... }:
 {
-  # Create 'm00wl' user account.
   users.users.m00wl = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];

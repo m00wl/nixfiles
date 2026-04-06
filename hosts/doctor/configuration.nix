@@ -23,10 +23,7 @@
   time.timeZone = "Europe/Amsterdam";
 
   # List packages installed in system profile.
-  environment.systemPackages = with pkgs; [
-    vim
-    wget
-  ];
+  environment.systemPackages = builtins.attrValues { inherit (pkgs) vim wget; };
 
   system.stateVersion = "21.11";
 }

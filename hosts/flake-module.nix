@@ -1,4 +1,4 @@
-{ self, inputs, config, ... }:
+{ self, inputs, ... }:
 let
   commonNixosModules = [
 
@@ -31,9 +31,6 @@ in
           inputs.disko.nixosModules.disko
           self.nixosModules.gui
         ];
-      };
-      slnix = inputs.nixpkgs.lib.nixosSystem {
-        modules = commonNixosModules ++ [ ./slnix/configuration.nix ];
       };
       sisko = inputs.nixpkgs.lib.nixosSystem {
         modules = commonNixosModules ++ [
@@ -88,16 +85,6 @@ in
         modules = commonNixosModules ++ [
           ./data/configuration.nix
           inputs.disko.nixosModules.disko
-        ];
-      };
-      dax = inputs.nixpkgs.lib.nixosSystem {
-        modules = commonNixosModules ++ [
-          inputs.nixos-hardware.nixosModules.common-pc
-          inputs.nixos-hardware.nixosModules.common-pc-ssd
-          inputs.nixos-hardware.nixosModules.common-cpu-intel
-          ./dax/configuration.nix
-          inputs.disko.nixosModules.disko
-          self.nixosModules.gui
         ];
       };
     };

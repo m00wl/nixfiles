@@ -7,5 +7,7 @@
     pinentryFlavor = "curses";
   };
 
-  home.packages = with pkgs; [ pinentry ];
+  home.packages = builtins.attrValues {
+    inherit (pkgs) pinentry;
+  };
 }
