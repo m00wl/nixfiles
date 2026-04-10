@@ -77,7 +77,13 @@
     };
   };
 
-  nix.gc.options = "--delete-older-than 56d";
+  nix = {
+    gc.options = "--delete-older-than 32d";
+    optimise = {
+      automatic = true;
+      dates = "Tue 05:30";
+    };
+  };
 
   system = {
     autoUpgrade = {
