@@ -12,6 +12,8 @@ in
 {
   imports = [ (modulesPath + "/installer/cd-dvd/installation-cd-minimal.nix") ];
   boot.kernelParams = [ "console=ttyS0,115200" ];
+  # TODO: remove once default in 26.11:
+  boot.zfs.forceImportRoot = false;
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   networking.hostName = "cochrane";
   systemd.services.sshd.wantedBy = lib.mkForce [ "multi-user.target" ];

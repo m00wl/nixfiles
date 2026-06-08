@@ -8,9 +8,13 @@
   ];
 
   # Use systemd-boot EFI boot loader.
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+    # TODO: remove once default in 26.11:
+    zfs.forceImportRoot = false;
   };
 
   # Configure networking.

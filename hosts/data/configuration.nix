@@ -38,7 +38,7 @@
       enable = true;
       hostName = "nc.lum.me";
       https = true;
-      package = pkgs.nextcloud32;
+      package = pkgs.nextcloud33;
       config = {
         dbtype = "sqlite";
         adminpassFile = "/etc/nextcloud-admin-pass";

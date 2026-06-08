@@ -1,5 +1,8 @@
 { config, ... }:
 
+let
+  key = builtins.readFile ../../users/m00wl/id_ed25519_mwl.pub;
+in
 {
   boot = {
     initrd = {
@@ -9,8 +12,7 @@
         ssh = {
           enable = true;
           port = 22;
-          shell = "/bin/cryptsetup-askpass";
-          authorizedKeyFiles = [ ../../users/m00wl/id_ed25519_mwl.pub ];
+          authorizedKeys = [ ''command="systemctl default" ${key}'' ];
           hostKeys = [ "/etc/secrets/initrd/ssh_host_ed25519_key" ];
         };
       };
