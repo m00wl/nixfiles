@@ -43,6 +43,10 @@
         dbtype = "sqlite";
         adminpassFile = "/etc/nextcloud-admin-pass";
       };
+      settings = {
+        trusted_proxies = [ "192.168.0.3" ];
+        overwriteprotocol = "https";
+      };
       extraApps = {
         inherit (config.services.nextcloud.package.packages.apps)
           contacts
