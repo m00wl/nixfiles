@@ -96,6 +96,7 @@
       enable = true;
       dates = "Tue 05:00";
       flake = "github:m00wl/nixfiles";
+      randomizedDelaySec = "900";
       runGarbageCollection = true;
     };
     stateVersion = "25.05";
