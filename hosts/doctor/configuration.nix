@@ -25,5 +25,5 @@
   # List packages installed in system profile.
   environment.systemPackages = builtins.attrValues { inherit (pkgs) vim wget; };
 
-  system.stateVersion = "21.11";
+  system.stateVersion = "26.06";
 }

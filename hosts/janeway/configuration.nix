@@ -3,8 +3,8 @@
 {
   imports = [
     ./hardware.nix
+    ./disk.nix
     ./home.nix
-    ../../modules/src/zfs.nix
   ];
 
   # Use systemd-boot EFI boot loader.
@@ -13,18 +13,12 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    # TODO: remove once default in 26.11:
-    zfs.forceImportRoot = false;
   };
 
   # Configure networking.
   networking = {
-    hostName = "nlnix";
-    hostId = "737e8eaa";
-    networkmanager = {
-      enable = true;
-      plugins = [ pkgs.networkmanager-openconnect ];
-    };
+    hostName = "janeway";
+    networkmanager.enable=true;
   };
 
   # Set time zone.
@@ -40,5 +34,5 @@
     dates = "weekly";
   };
 
-  system.stateVersion = "22.05";
+  system.stateVersion = "26.05";
 }

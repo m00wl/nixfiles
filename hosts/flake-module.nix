@@ -4,6 +4,7 @@ let
 
     # Common inputs.
     inputs.home-manager.nixosModules.home-manager
+    inputs.disko.nixosModules.disko
 
     # Base system configuration.
     self.nixosModules.base
@@ -16,19 +17,19 @@ in
   flake = {
 
     nixosConfigurations = {
-      nlnix = inputs.nixpkgs.lib.nixosSystem {
+      janeway = inputs.nixpkgs.lib.nixosSystem {
         modules = commonNixosModules ++ [
           inputs.nixos-hardware.nixosModules.common-pc-laptop
           inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
           inputs.nixos-hardware.nixosModules.common-cpu-intel
-          ./nlnix/configuration.nix
+          inputs.nixos-hardware.nixosModules.common-gpu-intel
+          ./janeway/configuration.nix
           self.nixosModules.gui
         ];
       };
       doctor = inputs.nixpkgs.lib.nixosSystem {
         modules = commonNixosModules ++ [
           ./doctor/configuration.nix
-          inputs.disko.nixosModules.disko
           self.nixosModules.gui
         ];
       };
@@ -36,7 +37,6 @@ in
         modules = commonNixosModules ++ [
           inputs.nixos-hardware.nixosModules.intel-nuc-7i3bnb
           ./sisko/configuration.nix
-          inputs.disko.nixosModules.disko
         ];
       };
       cochrane = inputs.nixpkgs.lib.nixosSystem {
@@ -46,38 +46,32 @@ in
         modules = commonNixosModules ++ [
           inputs.nixos-hardware.nixosModules.intel-nuc-7i3bnb
           ./seven/configuration.nix
-          inputs.disko.nixosModules.disko
         ];
       };
       queen = inputs.nixpkgs.lib.nixosSystem {
         modules = commonNixosModules ++ [
           ./queen/configuration.nix
-          inputs.disko.nixosModules.disko
         ];
       };
       q = inputs.nixpkgs.lib.nixosSystem {
         modules = commonNixosModules ++ [
           inputs.nixos-hardware.nixosModules.intel-nuc-7i3bnb
           ./q/configuration.nix
-          inputs.disko.nixosModules.disko
         ];
       };
       laforge = inputs.nixpkgs.lib.nixosSystem {
         modules = commonNixosModules ++ [
           ./laforge/configuration.nix
-          inputs.disko.nixosModules.disko
         ];
       };
       troi = inputs.nixpkgs.lib.nixosSystem {
         modules = commonNixosModules ++ [
           ./troi/configuration.nix
-          inputs.disko.nixosModules.disko
         ];
       };
       data = inputs.nixpkgs.lib.nixosSystem {
         modules = commonNixosModules ++ [
           ./data/configuration.nix
-          inputs.disko.nixosModules.disko
         ];
       };
     };
