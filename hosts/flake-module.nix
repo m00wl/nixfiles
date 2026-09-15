@@ -19,10 +19,9 @@ in
     nixosConfigurations = {
       janeway = inputs.nixpkgs.lib.nixosSystem {
         modules = commonNixosModules ++ [
-          inputs.nixos-hardware.nixosModules.common-pc-laptop
-          inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
-          inputs.nixos-hardware.nixosModules.common-cpu-intel
-          inputs.nixos-hardware.nixosModules.common-gpu-intel
+          inputs.nixos-hardware.nixosModules.common-pc-ssd
+          inputs.nixos-hardware.nixosModules.common-cpu-amd
+          inputs.nixos-hardware.nixosModules.common-gpu-amd
           ./janeway/configuration.nix
           self.nixosModules.gui
         ];
