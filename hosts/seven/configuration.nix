@@ -31,13 +31,13 @@
     data = {
       path = "/var/lib/borgbackup/data";
       authorizedKeys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPIUf4gvsMDgo6nsoS2AnT+X+ZYnLC92pGbe/x0ZvTMQ borg@data"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPIUf4gvsMDgo6nsoS2AnT+X+ZYnLC92pGbe/x0ZvTMQ borg-nextcloud@seven"
       ];
     };
     troi = {
       path = "/var/lib/borgbackup/troi";
       authorizedKeys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGOsM0SFfJ8yV93x9PoHLAckp4e9uhYb4HRgz8ZyMsV5 borg@troi"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGOsM0SFfJ8yV93x9PoHLAckp4e9uhYb4HRgz8ZyMsV5 borg-vaultwarden@seven"
       ];
     };
   };

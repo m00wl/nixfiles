@@ -54,31 +54,47 @@
           ;
       };
     };
-    borgbackup.jobs = {
-      nextcloud = {
-        paths = config.services.nextcloud.datadir;
-        environment.BORG_RSH = "ssh -i /root/borgbackup/id_ed25519_borg_data";
-        repo = "borg@seven:.";
-        encryption = {
-          mode = "repokey";
-          passCommand = "cat /root/borgbackup/repopass";
+    borgbackup.jobs =
+      let
+        lock = "/run/borgbackup.lock";
+        occ = "${config.services.nextcloud.occ}/bin/nextcloud-occ";
+        makeBorgJob = target: {
+          paths = config.services.nextcloud.datadir;
+          environment.BORG_RSH = "ssh -i /root/borgbackup/id_ed25519_borg_${target}";
+          encryption = {
+            mode = "repokey";
+            passCommand = "cat /root/borgbackup/repopass_${target}";
+          };
+          compression = "auto,lzma";
+          readWritePaths = [
+            config.services.nextcloud.datadir
+            lock
+          ];
+          preHook = ''
+            exec 200>${lock}
+            flock -x 200
+            ${occ} maintenance:mode --on
+          '';
+          postHook = ''
+            ${occ} maintenance:mode --off
+            exec 200>&-
+          '';
+          prune.keep = {
+            daily = 7;
+            weekly = 4;
+            monthly = 12;
+            yearly = -1;
+          };
         };
-        compression = "auto,lzma";
-        readWritePaths = [ config.services.nextcloud.datadir ];
-        preHook = ''
-          ${config.services.nextcloud.occ}/bin/nextcloud-occ maintenance:mode --on
-        '';
-        postHook = ''
-          ${config.services.nextcloud.occ}/bin/nextcloud-occ maintenance:mode --off
-        '';
-        prune.keep = {
-          daily = 7;
-          weekly = 4;
-          monthly = 12;
-          yearly = -1;
+      in
+      {
+        nextcloud-seven = (makeBorgJob "seven") // {
+          repo = "borg@seven:.";
+        };
+        nextcloud-queen = (makeBorgJob "queen") // {
+          repo = "borg@bak.lum.me:.";
         };
       };
-    };
   };
 
   nix = {

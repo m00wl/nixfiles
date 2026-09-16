@@ -59,24 +59,32 @@
         };
       };
     };
-    borgbackup.jobs = {
-      vaultwarden = {
-        paths = config.services.vaultwarden.backupDir;
-        environment.BORG_RSH = "ssh -i /root/borgbackup/id_ed25519_borg_troi";
-        repo = "borg@seven:.";
-        encryption = {
-          mode = "repokey";
-          passCommand = "cat /root/borgbackup/repopass";
+    borgbackup.jobs =
+      let
+        makeBorgJob = target: {
+          paths = config.services.vaultwarden.backupDir;
+          environment.BORG_RSH = "ssh -i /root/borgbackup/id_ed25519_borg_${target}";
+          encryption = {
+            mode = "repokey";
+            passCommand = "cat /root/borgbackup/repopass_${target}";
+          };
+          compression = "auto,lzma";
+          prune.keep = {
+            daily = 7;
+            weekly = 4;
+            monthly = 12;
+            yearly = -1;
+          };
         };
-        compression = "auto,lzma";
-        prune.keep = {
-          daily = 7;
-          weekly = 4;
-          monthly = 12;
-          yearly = -1;
+      in
+      {
+        vaultwarden-seven = (makeBorgJob "seven") // {
+          repo = "borg@seven:.";
+        };
+        vaultwarden-queen = (makeBorgJob "queen") // {
+          repo = "borg@bak.lum.me:.";
         };
       };
-    };
   };
 
   nix = {

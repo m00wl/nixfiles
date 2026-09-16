@@ -7,23 +7,20 @@
 }:
 
 {
-  imports = [
-    (modulesPath + "/profiles/minimal.nix")
-    (modulesPath + "/profiles/qemu-guest.nix")
-  ];
+  imports = [ ];
 
   boot.initrd.availableKernelModules = [
-    "ata_piix"
-    "uhci_hcd"
-    "virtio_pci"
-    "virtio_scsi"
+    "xhci_pci"
+    "ahci"
+    "usbhid"
+    "uas"
     "sd_mod"
-    "sr_mod"
+    "sdhci_pci"
   ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  networking.useDHCP = lib.mkDefault true;
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  hardware.enableRedistributableFirmware = lib.mkDefault true;
 }

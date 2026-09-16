@@ -49,6 +49,7 @@ in
       };
       queen = inputs.nixpkgs.lib.nixosSystem {
         modules = commonNixosModules ++ [
+          inputs.nixos-hardware.nixosModules.common-cpu-intel
           ./queen/configuration.nix
         ];
       };
