@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
 declare -A HOST_SERVICES=(
-    [data]="nixos-upgrade borgbackup-job-nextcloud nextcloud-cron"
+    [data]="nixos-upgrade borgbackup-job-nextcloud-seven borgbackup-job-nextcloud-queen nextcloud-cron"
     [laforge]="nixos-upgrade nginx"
     [seven]="nixos-upgrade"
+    [queen]="nixos-upgrade fail2ban"
     [sisko]="nixos-upgrade dnsmasq fail2ban ddclient"
-    [troi]="nixos-upgrade borgbackup-job-vaultwarden vaultwarden"
+    [troi]="nixos-upgrade borgbackup-job-vaultwarden-seven borgbackup-job-vaultwarden-queen vaultwarden"
 )
 
 readonly C_RED=$'\e[1;31m'
